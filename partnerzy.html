@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klub Gepardy Białystok - Partnerzy</title>
+    <style>
+        /* ===========================
+           ZMIENNE I RESET (Z Twojego nowego stylu)
+        =========================== */
+        :root {
+            --black: #0f0f0f;
+            --dark: #1b1b1b;
+            --gold: #d4a02f;
+            --gold-light: #f0c14b;
+            --red: #8d1010;
+            --white: #ffffff;
+            --gray: #d8d8d8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
+            min-height: 100vh;
+        }
+
+        /* ===========================
+           NAVBAR / HEADER
+        =========================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, .95);
+            border-bottom: 3px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 70px;
+            z-index: 999;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 65px;
+        }
+
+        .logo h2 {
+            color: var(--gold);
+            font-size: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            border: 1px solid transparent;
+            border-radius: 30px;
+            transition: .3s;
+        }
+
+        /* Przycisk powrotu stylizowany na delikatną ramkę */
+        nav a.back-btn {
+            border-color: rgba(212, 160, 47, .4);
+            color: var(--gold);
+        }
+
+        nav a.back-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
+        }
+
+        /* ===========================
+           SEKCJA PARTNERZY 
+        =========================== */
+        .partners {
+            width: 90%;
+            max-width: 1400px;
+            margin: 160px auto 80px; /* Zwiększony margines, żeby nagłówek nie zasłaniał h1 */
+            padding: 20px;
+        }
+
+        .partners h1 {
+            text-align: center;
+            font-size: 58px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .partners p {
+            text-align: center;
+            color: var(--gray);
+            font-size: 20px;
+            margin-bottom: 70px;
+        }
+
+        /* SIATKA KAFELKÓW */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        /* KAFELEK PARTNERA */
+        .partner-card {
+            position: relative;
+            background: linear-gradient(180deg, #1b1b1b, #0a0a0a);
+            border: 2px solid rgba(212, 160, 47, .35);
+            border-radius: 22px;
+            padding: 45px 30px;
+            text-align: center;
+            overflow: hidden;
+            transition: .35s;
+        }
+
+        .partner-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        }
+
+        .partner-card::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -60%;
+            width: 70%;
+            height: 300%;
+            background: rgba(255, 255, 255, .08);
+            transform: rotate(25deg);
+            transition: .8s;
+        }
+
+        .partner-card:hover::before {
+            left: 130%;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow:
+                0 0 30px rgba(212, 160, 47, .25),
+                0 20px 35px rgba(0, 0, 0, .65);
+        }
+
+        /* RAMKA NA LOGO (Dla kwadratowych logotypów) */
+        .partner-logo {
+            width: 200px;
+            height: 140px;
+            margin: 0 auto 30px;
+            border-radius: 16px;
+            background: radial-gradient(circle at center, 
+                rgba(212, 160, 47, .15) 0%, 
+                rgba(212, 160, 47, .05) 70%, 
+                transparent 100%);
+            border: 2px solid rgba(212, 160, 47, .35);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            transition: .35s;
+            overflow: hidden;
+        }
+
+        .partner-card:hover .partner-logo {
+            transform: scale(1.05);
+            border-color: var(--gold);
+            box-shadow: 0 0 25px rgba(212, 160, 47, .30);
+        }
+
+        .partner-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* NAZWA PARTNERA */
+        .partner-card h3 {
+            color: var(--white);
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        /* RANGA SPONSORA */
+        .partner-card span {
+            display: block;
+            color: var(--gold);
+            margin-bottom: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* PRZYCISK KAFELKA */
+        .partner-card a {
+            display: inline-block;
+            padding: 14px 34px;
+            background: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 40px;
+            transition: .3s;
+        }
+
+        .partner-card a:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        /* RESPONSYWNOŚĆ */
+        @media(max-width:768px){
+            header {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .logo h2 {
+                font-size: 24px;
+            }
+
+            .partners {
+                margin-top: 180px; /* Więcej miejsca na telefonach przez pionowy układ headera */
+            }
+
+            .partners h1 {
+                font-size: 42px;
+            }
+
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partner-logo {
+                width: 160px;
+                height: 110px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Gepardy Białystok Logo" onerror="this.style.display='none'">
+            <h2>Gepardy</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="gepardy stronka.html" class="back-btn">← Strona Główna</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="partners">
+        <h1>Nasi Partnerzy</h1>
+        <p>Firmy i instytucje wspierające Klub Gepardy Białystok.</p>
+
+        <div class="partners-grid">
+            
+            <div class="partner-card">
+                <div class="partner-logo">
+                    <img src="podlaskie.jpg" alt="Województwo Podlaskie">
+                </div>
+                <h3>Województwo Podlaskie</h3>
+                <span>Sponsor Główny</span>
+                <a href="https://www.facebook.com/wojpodlaskie" target="_blank" rel="noopener noreferrer">Odwiedź stronę</a>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klub Gepardy Białystok - Kontakt</title>
+    <style>
+        /* ===========================
+           ZMIENNE I RESET (Spójne z resztą strony)
+        =========================== */
+        :root {
+            --black: #0f0f0f;
+            --dark: #1b1b1b;
+            --gold: #d4a02f;
+            --gold-light: #f0c14b;
+            --red: #8d1010;
+            --white: #ffffff;
+            --gray: #d8d8d8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
+            min-height: 100vh;
+        }
+
+        /* ===========================
+           NAVBAR / HEADER
+        =========================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, .95);
+            border-bottom: 3px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 70px;
+            z-index: 999;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 65px;
+        }
+
+        .logo h2 {
+            color: var(--gold);
+            font-size: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            border: 1px solid transparent;
+            border-radius: 30px;
+            transition: .3s;
+        }
+
+        nav a.back-btn {
+            border-color: rgba(212, 160, 47, .4);
+            color: var(--gold);
+        }
+
+        nav a.back-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
+        }
+
+        /* ===========================
+           SEKCJA KONTAKTOWA
+        =========================== */
+        .contact-section {
+            float: center;
+            width: 90%;
+            max-width: 1000px; /* Zawężone, aby całość wyglądała zgrabnie na środku */
+            margin: 160px auto 80px;
+            padding: 20px;
+        }
+
+        .contact-section h1 {
+            text-align: center;
+            font-size: 58px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-section > p {
+            text-align: center;
+            color: var(--gray);
+            font-size: 20px;
+            margin-bottom: 70px;
+        }
+
+        /* SYMETRYCZNA SIATKA NA ŚRODKU */
+        .contact-grid-centered {
+            display: grid;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* KAFELKI INFORMACYJNE */
+        .info-card {
+            position: relative;
+            background: linear-gradient(180deg, #1b1b1b, #0a0a0a);
+            border: 2px solid rgba(212, 160, 47, .35);
+            border-radius: 18px;
+            padding: 35px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: 0.35s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Złoty pasek z lewej strony kafelka */
+        .info-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold), var(--gold-light));
+            border-radius: 18px 0 0 18px;
+        }
+
+        /* Efekt unoszenia i świecenia przy najechaniu */
+        .info-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 
+                0 0 25px rgba(212, 160, 47, .25),
+                0 15px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Koło z ikoną */
+        .info-icon {
+            font-size: 35px;
+            color: var(--gold);
+            background: rgba(212, 160, 47, 0.1);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(212, 160, 47, 0.3);
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .info-card:hover .info-icon {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 15px rgba(212, 160, 47, 0.5);
+        }
+
+        /* Szczegóły tekstu */
+        .info-details h3 {
+            font-size: 20px;
+            color: var(--white);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-details p {
+            color: var(--gray);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .info-details a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .info-details a:hover {
+            color: var(--gold-light);
+            text-decoration: underline;
+        }
+
+        /* ===========================
+           RESPONSYWNOŚĆ
+        =========================== */
+        @media(max-width:768px) {
+            header {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .contact-section {
+                margin-top: 180px;
+            }
+
+            .contact-section h1 {
+                font-size: 42px;
+            }
+
+            .contact-grid-centered {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .info-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Gepardy Białystok Logo" onerror="this.style.display='none'">
+            <h2>Klub Unihokeja</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="gepardy stronka.html" class="back-btn">← Strona Główna</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contact-section">
+        <h1>Kontakt</h1>
+        <p>Masz pytania? Chcesz do nas dołączyć? Skontaktuj się bezpośrednio z klubem.</p>
+
+        <div class="contact-grid-centered">
+            
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <div class="info-details">
+                    <h3>Nasza Siedziba</h3>
+                    <p>Zespół Szkolno-Przedszkolnym nr 2</p>
+                    <p>ul. Pułaskiego 25</p>
+                    <p>15-337 Białystok</p>
+                </div>
+            </div>
+            <br>
+
+            <div class="info-card">
+                <div class="info-icon">✉️</div>
+                <div class="info-details">
+                    <h3>Napisz do nas</h3>
+                    <p><a href="mailto:gepardybialystok@op.pl">gepardybialystok@op.pl</a></p>
+                    <p>Odpowiadamy najszybciej jak to możliwe.</p>
+                </div>
+            </div>
+            <br>
+            <div class="info-card">
+                <div class="info-icon">📞</div>
+                <div class="info-details">
+                    <h3>Zadzwoń do nas</h3>
+                    <p>+48 728 873 850</p>
+                    <p>Dostępni od pon. do pt. (15:00 - 19:00)</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

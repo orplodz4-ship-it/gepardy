@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klub Gepardy Białystok - O klubie</title>
+    <style>
+        /* ===========================
+           ZMIENNE I RESET (Spójne z resztą strony)
+        =========================== */
+        :root {
+            --black: #0f0f0f;
+            --dark: #1b1b1b;
+            --gold: #d4a02f;
+            --gold-light: #f0c14b;
+            --red: #8d1010;
+            --white: #ffffff;
+            --gray: #d8d8d8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
+            min-height: 100vh;
+        }
+
+        /* ===========================
+           NAVBAR / HEADER
+        =========================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, .95);
+            border-bottom: 3px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 70px;
+            z-index: 999;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 65px;
+        }
+
+        .logo h2 {
+            color: var(--gold);
+            font-size: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            border: 1px solid transparent;
+            border-radius: 30px;
+            transition: .3s;
+        }
+
+        nav a.back-btn {
+            border-color: rgba(212, 160, 47, .4);
+            color: var(--gold);
+        }
+
+        nav a.back-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
+        }
+
+        /* ===========================
+           GŁÓWNA SEKCJA "O KLUBIE"
+        =========================== */
+        .about-section {
+            width: 90%;
+            max-width: 1400px;
+            margin: 160px auto 60px;
+            padding: 20px;
+        }
+
+        .about-section h1 {
+            text-align: center;
+            font-size: 58px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-section > p {
+            text-align: center;
+            color: var(--gray);
+            font-size: 20px;
+            margin-bottom: 70px;
+        }
+
+        /* UKŁAD DWUKOLUMNOWY */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .about-text h2 {
+            font-size: 36px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* RAMKA NA ZDJĘCIE */
+        .about-image {
+            position: relative;
+            border: 2px solid rgba(212, 160, 47, .35);
+            border-radius: 22px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            transition: 0.4s;
+        }
+
+        .about-image::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .about-image:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(212, 160, 47, .25);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ===========================
+           SEKCJA WARTOŚCI / MISJA (Kafelki)
+        =========================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            position: relative;
+            background: linear-gradient(180deg, #1b1b1b, #0a0a0a);
+            border: 2px solid rgba(212, 160, 47, .35);
+            border-radius: 22px;
+            padding: 40px 30px;
+            text-align: center;
+            overflow: hidden;
+            transition: .35s;
+        }
+
+        .feature-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -60%;
+            width: 70%;
+            height: 300%;
+            background: rgba(255, 255, 255, .08);
+            transform: rotate(25deg);
+            transition: .8s;
+        }
+
+        .feature-card:hover::before {
+            left: 130%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(212, 160, 47, .25), 0 20px 35px rgba(0, 0, 0, .65);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: var(--white);
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-card p {
+            color: #bdbdbd;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* ===========================
+           RESPONSYWNOŚĆ
+        =========================== */
+        @media(max-width:900px) {
+            header {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .about-section {
+                margin-top: 180px;
+            }
+
+            .about-section h1 {
+                font-size: 42px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image {
+                height: 300px;
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Gepardy Białystok Logo" onerror="this.style.display='none'">
+            <h2>Gepardy</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="gepardy stronka.html" class="back-btn">← Strona Główna</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="about-section">
+        <h1>O Klubie</h1>
+        <p>Poznaj historię i cele, które napędzają nasz zespół.</p>
+
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Kim jesteśmy?</h2>
+                <p>Klub Unihokeja Gepardy Białystok został założony 3 września 2025 roku jako kontynuacja szkolnej drużyny unihokeja. Klub działa przy Zespole Szkolno-Przedszkolnym nr 2 ul. Pułaskiego 25 w Białymstoku, tworząc przestrzeń do rozwoju sportowego dzieci i młodzieży.</p>
+                <p>Naszą misją jest popularyzacja unihokeja, rozwijanie umiejętności zawodników oraz kształtowanie wartości takich jak współpraca, szacunek i sportowa pasja.</p>
+            </div>
+            <div class="about-image">
+                <img src="oklubie.jpg" alt="Klub Unihokeja Gepardy Białystok" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
