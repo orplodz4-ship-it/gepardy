@@ -110,6 +110,7 @@
             color: var(--gold);
         }
 
+        /* Aktywna linia pod linkiem głównym */
         nav li.active::after {
             content: '';
             position: absolute;
@@ -180,6 +181,7 @@
             transition: 0.25s;
         }
 
+        /* Ikony w dropdownie */
         .dropdown-content a svg {
             width: 18px;
             height: 18px;
@@ -197,6 +199,7 @@
             transform: scale(1.1);
         }
 
+        /* Wyświetlanie menu */
         .dropdown:hover .dropdown-content,
         .dropdown.active .dropdown-content {
             opacity: 1;
@@ -310,7 +313,7 @@
         }
 
         /* ==========================================
-           KAFELKI
+           KAFELKI (CARDS GRID)
         ========================================== */
         .cards-section {
             background: var(--black);
@@ -392,7 +395,9 @@
         .card-link:hover .card-custom {
             transform: translateY(-10px);
             border-color: var(--gold);
-            box-shadow: 0 0 30px rgba(212, 160, 47, 0.15), 0 15px 35px rgba(0, 0, 0, 0.7);
+            box-shadow: 
+                0 0 30px rgba(212, 160, 47, 0.15),
+                0 15px 35px rgba(0, 0, 0, 0.7);
         }
 
         .card-link:hover .card-custom::before {
@@ -488,19 +493,38 @@
         }
 
         /* ==========================================
-           RESPONSYWNOŚĆ
+           RESPONSYWNOŚĆ (MEDIA QUERIES)
         ========================================== */
         @media (max-width: 1100px) {
-            header { padding: 15px 30px; }
-            .hero-title { font-size: 56px; }
-            .cards-container { grid-template-columns: 1fr; gap: 25px; max-width: 500px; }
+            header {
+                padding: 15px 30px;
+            }
+            .hero-title {
+                font-size: 56px;
+            }
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                max-width: 500px;
+            }
         }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; padding: 15px; }
-            .hero-title { font-size: 42px; }
-            .hero-subtitle { font-size: 20px; }
-            .dropdown { padding-bottom: 0; margin-bottom: 0; }
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .hero-title {
+                font-size: 42px;
+            }
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            .dropdown {
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
             .dropdown-content {
                 position: static;
                 width: 100%;
@@ -513,10 +537,22 @@
                 transform: none;
                 display: none; 
             }
-            .dropdown.active .dropdown-content { display: flex; }
-            nav ul { flex-direction: column; width: 100%; text-align: center; gap: 5px; }
-            nav a { padding: 10px; display: block; }
-            nav li.active::after { display: none; }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                gap: 5px;
+            }
+            nav a {
+                padding: 10px;
+                display: block;
+            }
+            nav li.active::after {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -533,7 +569,7 @@
 
         <nav>
             <ul>
-                <li class="active"><a href="index.html">Strona Główna</a></li>
+                <li class="active"><a href="#">Strona Główna</a></li>
                 <li class="dropdown">
                     <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
@@ -580,12 +616,18 @@
                 <div class="separator-line right"></div>
             </div>
 
-            <a href="https://www.facebook.com/p/Gepardy-Bia%C5%82ystok-61579192367044/" class="btn-outline" target="_blank" rel="noopener noreferrer">Więcej informacji ❯</a>
+            <a href="https://www.facebook.com/p/Gepardy-Bia%C5%82ystok-61579192367044/" 
+               class="btn-outline" 
+               target="_blank" 
+               rel="noopener noreferrer">
+               Więcej informacji ❯
+            </a>
         </div>
     </section>
 
     <section class="cards-section">
         <div class="cards-container">
+            
             <a href="https://rejestr.io/krs/1192189/fundacja-gepardy-bialystok" target="_blank" rel="noopener noreferrer" class="card-link">
                 <div class="card-custom">
                     <div class="card-icon-wrapper">
@@ -594,6 +636,7 @@
                     <h2>O klubie</h2>
                 </div>
             </a>
+
             <a href="https://www.polskiunihokej.pl/component/joomsport/team/747/794" target="_blank" rel="noopener noreferrer" class="card-link">
                 <div class="card-custom">
                     <div class="card-icon-wrapper">
@@ -602,6 +645,7 @@
                     <h2>Rozgrywki</h2>
                 </div>
             </a>
+
         </div>
     </section>
 
@@ -613,7 +657,9 @@
                 </svg>
             </div>
         </div>
+        
         <p>© 2026 Gepardy Białystok Klub Unihokeja</p>
+
         <div class="partners-footer">
             <h4>Wspierają nas:</h4>
             <a href="https://www.facebook.com/wojpodlaskie" target="_blank" rel="noopener noreferrer">
@@ -640,5 +686,4 @@
         });
     </script>
 </body>
-</html>
 </html>
