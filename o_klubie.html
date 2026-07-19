@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klub Gepardy Białystok - O klubie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&display=swap" rel="stylesheet">
     <style>
         /* ===========================
            ZMIENNE I RESET (Spójne z resztą strony)
@@ -34,10 +37,12 @@
             color: var(--white);
             background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* ===========================
-           NAVBAR / HEADER
+           NAVBAR / HEADER & DROPDOWN
         =========================== */
         header {
             position: fixed;
@@ -61,39 +66,96 @@
 
         .logo img {
             width: 65px;
+            height: auto;
+        }
+
+        .logo-text span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            display: block;
+            margin-bottom: -5px;
         }
 
         .logo h2 {
             color: var(--gold);
-            font-size: 30px;
+            font-family: 'Teko', sans-serif;
+            font-size: 36px;
             letter-spacing: 2px;
             text-transform: uppercase;
+            line-height: 1;
         }
 
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
+            gap: 10px;
         }
 
-        nav a {
+        nav a, .dropdown-trigger {
             color: var(--white);
             text-decoration: none;
             padding: 12px 24px;
             font-weight: 600;
             border: 1px solid transparent;
-            border-radius: 30px;
+            border-radius: 4px;
             transition: .3s;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
         }
 
-        nav a.back-btn {
-            border-color: rgba(212, 160, 47, .4);
+        nav a:hover, .dropdown-trigger:hover, .dropdown.active .dropdown-trigger {
             color: var(--gold);
         }
 
-        nav a.back-btn:hover {
-            background: var(--gold);
-            color: var(--black);
-            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
+        /* Obsługa Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #111111;
+            border: 1px solid #222222;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            min-width: 200px;
+            border-radius: 4px;
+            margin-top: 10px;
+            flex-direction: column;
+            list-style: none;
+            padding: 5px 0;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: flex;
+        }
+
+        .dropdown-content li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 0;
+            text-transform: uppercase;
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .dropdown-content li a:hover {
+            background: #1c1c1c;
+            color: var(--gold);
+        }
+
+        .dropdown-content svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         /* ===========================
@@ -101,70 +163,76 @@
         =========================== */
         .about-section {
             width: 90%;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 160px auto 60px;
             padding: 20px;
+            flex: 1;
         }
 
         .about-section h1 {
             text-align: center;
-            font-size: 58px;
+            font-family: 'Teko', sans-serif;
+            font-size: 72px;
             color: var(--gold);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 15px;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+            line-height: 1;
         }
 
         .about-section > p {
             text-align: center;
             color: var(--gray);
-            font-size: 20px;
-            margin-bottom: 70px;
+            font-size: 18px;
+            margin-bottom: 60px;
         }
 
         /* UKŁAD DWUKOLUMNOWY */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 0.8fr;
             gap: 60px;
             align-items: center;
-            margin-bottom: 80px;
+            margin-bottom: 40px;
         }
 
         .about-text h2 {
-            font-size: 36px;
+            font-family: 'Teko', sans-serif;
+            font-size: 38px;
             color: var(--gold);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .about-text p {
             color: var(--gray);
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1.8;
             margin-bottom: 20px;
         }
 
-        /* RAMKA NA ZDJĘCIE */
+        /* RAMKA NA ZDJĘCIE (Styl premium / ostry) */
         .about-image {
             position: relative;
-            border: 2px solid rgba(212, 160, 47, .35);
-            border-radius: 22px;
+            border: 1px solid rgba(212, 160, 47, .25);
+            border-radius: 6px;
             overflow: hidden;
             height: 400px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             transition: 0.4s;
         }
 
+        /* Złoty pasek na górze zdjęcia */
         .about-image::after {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 6px 6px 0 0;
         }
 
         .about-image img {
@@ -176,103 +244,29 @@
 
         .about-image:hover {
             border-color: var(--gold);
-            box-shadow: 0 0 30px rgba(212, 160, 47, .25);
+            box-shadow: 0 0 30px rgba(212, 160, 47, .20);
         }
 
         .about-image:hover img {
             transform: scale(1.03);
         }
 
-        /* ===========================
-           SEKCJA WARTOŚCI / MISJA (Kafelki)
-        =========================== */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            position: relative;
-            background: linear-gradient(180deg, #1b1b1b, #0a0a0a);
-            border: 2px solid rgba(212, 160, 47, .35);
-            border-radius: 22px;
-            padding: 40px 30px;
+        /* STOPKA */
+        footer {
             text-align: center;
-            overflow: hidden;
-            transition: .35s;
-        }
-
-        .feature-card::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
-        }
-
-        .feature-card::before {
-            content: "";
-            position: absolute;
-            top: -100%;
-            left: -60%;
-            width: 70%;
-            height: 300%;
-            background: rgba(255, 255, 255, .08);
-            transform: rotate(25deg);
-            transition: .8s;
-        }
-
-        .feature-card:hover::before {
-            left: 130%;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold);
-            box-shadow: 0 0 30px rgba(212, 160, 47, .25), 0 20px 35px rgba(0, 0, 0, .65);
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            color: var(--gold);
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .feature-card h3 {
-            color: var(--white);
-            font-size: 22px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .feature-card p {
-            color: #bdbdbd;
-            font-size: 16px;
-            line-height: 1.6;
+            padding: 30px;
+            background: #0a0a0a;
+            border-top: 1px solid #1a1a1a;
+            color: #555;
+            font-size: 13px;
         }
 
         /* ===========================
            RESPONSYWNOŚĆ
         =========================== */
-        @media(max-width:900px) {
+        @media(max-width: 992px) {
             header {
-                flex-direction: column;
-                padding: 15px 20px;
-                gap: 15px;
-            }
-
-            .about-section {
-                margin-top: 180px;
-            }
-
-            .about-section h1 {
-                font-size: 42px;
+                padding: 15px 30px;
             }
 
             .about-grid {
@@ -281,8 +275,24 @@
             }
 
             .about-image {
-                height: 300px;
-                order: -1;
+                height: 350px;
+                order: -1; /* Zdjęcie ląduje nad tekstem na mniejszych ekranach */
+            }
+        }
+
+        @media(max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                position: static;
+            }
+
+            .about-section {
+                margin-top: 40px;
+            }
+
+            .about-section h1 {
+                font-size: 52px;
             }
         }
     </style>
@@ -300,7 +310,7 @@
 
         <nav>
             <ul>
-                <li class="active"><a href="#">Strona Główna</a></li>
+                <li><a href="index.html">Strona Główna</a></li>
                 <li class="dropdown">
                     <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
@@ -310,7 +320,6 @@
                                 O klubie
                             </a>
                         </li>
-                        
                         <li>
                             <a href="galeria.html">
                                 <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
@@ -342,31 +351,4 @@
         <div class="about-grid">
             <div class="about-text">
                 <h2>Kim jesteśmy?</h2>
-                <p>Klub Unihokeja Gepardy Białystok został założony 3 września 2025 roku jako kontynuacja szkolnej drużyny unihokeja. Klub działa przy Zespole Szkolno-Przedszkolnym nr 2 ul. Pułaskiego 25 w Białymstoku, tworząc przestrzeń do rozwoju sportowego dzieci i młodzieży.</p>
-                <p>Naszą misją jest popularyzacja unihokeja, rozwijanie umiejętności zawodników oraz kształtowanie wartości takich jak współpraca, szacunek i sportowa pasja.</p>
-            </div>
-            <div class="about-image">
-                <img src="oklubie.jpg" alt="Klub Unihokeja Gepardy Białystok" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
-            </div>
-        </div>
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const dropdown = document.querySelector('.dropdown');
-            const trigger = document.querySelector('.dropdown-trigger');
-
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dropdown.classList.toggle('active');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.classList.remove('active');
-                }
-            });
-        });
-    </script>
-
-</body>
-</html>
+                <p>Klub Unihokeja Gepardy Białystok został założony 3 września 2025 roku jako kontynuacja szkolnej drużyny unihokeja
