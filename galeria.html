@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klub Gepardy Białystok - Galeria</title>
     <style>
-        /* ===========================
-           ZMIENNE I RESET (Spójne z resztą strony)
-        =========================== */
+        /* ==========================================
+           ZMIENNE I BAZOWE USTAWIENIA (Pełna spójność z index)
+        ========================================== */
         :root {
-            --black: #0f0f0f;
-            --dark: #1b1b1b;
+            --black: #0a0a0a;
+            --dark-card: #141414;
             --gold: #d4a02f;
-            --gold-light: #f0c14b;
-            --red: #8d1010;
+            --gold-light: #f5c453;
             --white: #ffffff;
-            --gray: #d8d8d8;
+            --gray: #a0a0a0;
         }
 
         * {
@@ -30,15 +29,16 @@
         }
 
         body {
-            background: var(--black);
+            background-color: var(--black);
             color: var(--white);
+            overflow-x: hidden;
             background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
             min-height: 100vh;
         }
 
-        /* ===========================
-           NAVBAR / HEADER
-        =========================== */
+        /* ==========================================
+           NAVBAR (NAGŁÓWEK - Identyczny jak na index.html)
+        ========================================== */
         header {
             position: fixed;
             top: 0;
@@ -60,45 +60,155 @@
         }
 
         .logo img {
-            width: 65px;
+            height: 70px;
+            width: auto;
         }
 
-        .logo h2 {
-            color: var(--gold);
-            font-size: 30px;
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text span {
+            font-size: 14px;
+            color: var(--white);
+            font-weight: 800;
             letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo-text h2 {
+            color: var(--gold);
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            line-height: 1;
             text-transform: uppercase;
         }
 
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav li {
+            position: relative;
         }
 
         nav a {
             color: var(--white);
             text-decoration: none;
             padding: 12px 24px;
-            font-weight: 600;
-            border: 1px solid transparent;
-            border-radius: 30px;
-            transition: .3s;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: .3s ease;
         }
 
-        nav a.back-btn {
-            border-color: rgba(212, 160, 47, .4);
+        nav a:hover, nav li.active a {
             color: var(--gold);
         }
 
-        nav a.back-btn:hover {
+        nav li.active::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 24px;
+            width: calc(100% - 48px);
+            height: 3px;
             background: var(--gold);
-            color: var(--black);
-            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
         }
 
-        /* ===========================
+        /* DROPDOWN (MENU ROZWIJANE) */
+        .dropdown {
+            padding-bottom: 15px;
+            margin-bottom: -15px; 
+        }
+
+        .dropdown-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            color: var(--white);
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .dropdown-trigger:hover {
+            color: var(--gold);
+        }
+
+        .dropdown-content {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            background: rgba(15, 15, 15, 0.98);
+            min-width: 260px;
+            border: 1px solid rgba(212, 160, 47, 0.4);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            padding: 10px 0;
+            z-index: 1001;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-content li {
+            width: 100%;
+        }
+
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 25px;
+            font-size: 13px;
+            color: var(--white);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: 0.25s;
+        }
+
+        .dropdown-content a svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--gold);
+            transition: 0.25s;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(212, 160, 47, 0.1);
+            color: var(--gold);
+        }
+
+        .dropdown-content a:hover svg {
+            fill: var(--gold-light);
+            transform: scale(1.1);
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown.active .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* ==========================================
            GŁÓWNA SEKCJA GALERII
-        =========================== */
+        ========================================== */
         .gallery-section {
             width: 90%;
             max-width: 1400px;
@@ -123,9 +233,6 @@
             margin-bottom: 70px;
         }
 
-        /* ===========================
-           KATEGORIE / WYDARZENIA
-        =========================== */
         .gallery-category {
             margin-bottom: 80px;
         }
@@ -140,14 +247,12 @@
             letter-spacing: 1px;
         }
 
-        /* SIATKA ZDJĘĆ */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
-        /* POJEDYNCZE ZDJĘCIE (KAFELEK) */
         .gallery-item {
             position: relative;
             background: #111;
@@ -223,9 +328,9 @@
             transform: scale(1);
         }
 
-        /* ===========================
-           LIGHTBOX Z GUZIKAMI I BLOKADĄ ZAZNACZANIA
-        =========================== */
+        /* ==========================================
+           LIGHTBOX Z OBSŁUGĄ PRZEWIJANIA (STRZAŁKI)
+        ========================================== */
         .lightbox {
             display: none;
             position: fixed;
@@ -258,12 +363,8 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            z-index: 1010;
-            
-            /* Zapobieganie podświetlaniu na niebiesko */
-            -webkit-user-select: none;
-            -ms-user-select: none;
             user-select: none;
+            z-index: 1010;
         }
 
         .lightbox-close:hover {
@@ -271,6 +372,7 @@
             transform: scale(1.1);
         }
 
+        /* EKRANOWE STRZAŁKI NAWIGACJI */
         .lightbox-arrow {
             position: absolute;
             top: 50%;
@@ -279,80 +381,67 @@
             font-size: 60px;
             font-weight: bold;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(212, 160, 47, 0.3);
-            transition: 0.3s;
-            z-index: 1010;
-
-            /* Zapobieganie podświetlaniu na niebiesko przy szybkich kliknięciach */
-            -webkit-user-select: none;
-            -ms-user-select: none;
             user-select: none;
+            padding: 20px;
+            transition: 0.3s ease;
+            z-index: 1005;
+            text-shadow: 0 0 15px rgba(0,0,0,0.8);
         }
 
         .lightbox-arrow:hover {
             color: var(--gold);
-            border-color: var(--gold);
-            background: rgba(212, 160, 47, 0.1);
-            box-shadow: 0 0 15px rgba(212, 160, 47, 0.3);
+            transform: translateY(-50%) scale(1.15);
         }
 
-        .lightbox-arrow.left { left: 30px; }
-        .lightbox-arrow.right { right: 30px; }
+        .lightbox-arrow.left {
+            left: 30px;
+        }
+
+        .lightbox-arrow.right {
+            right: 30px;
+        }
 
         @keyframes zoomEffect {
             from { transform: scale(0.95); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* ===========================
+        /* ==========================================
            RESPONSYWNOŚĆ
-        =========================== */
-        @media(max-width:768px) {
-            header {
-                flex-direction: column;
-                padding: 15px 20px;
-                gap: 15px;
-            }
-            .gallery-section {
-                margin-top: 180px;
-            }
-            .gallery-section h1 {
-                font-size: 42px;
-            }
-            .gallery-category h2 {
-                font-size: 22px;
-                margin-bottom: 20px;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 15px;
-            }
-            .lightbox-close {
-                top: 20px;
-                right: 25px;
-                font-size: 35px;
-            }
-            .lightbox-arrow {
-                font-size: 40px;
-                padding: 5px 12px;
-            }
-            .lightbox-arrow.left { left: 10px; }
-            .lightbox-arrow.right { right: 10px; }
+        ========================================== */
+        @media (max-width: 1100px) {
+            header { padding: 15px 30px; }
         }
 
-        /* ==========================================
-           STYLE DLA DROPDOWN
-        ========================================== */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: var(--dark); border: 1px solid var(--gold); border-radius: 8px; list-style: none; padding: 10px 0; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); z-index: 1000; }
-        .dropdown-content li a { display: flex; align-items: center; gap: 10px; padding: 10px 20px; color: var(--white); text-decoration: none; border-radius: 0; }
-        .dropdown-content li a:hover { background: rgba(212, 160, 47, 0.1); color: var(--gold); }
-        .dropdown-content svg { width: 20px; height: 20px; fill: var(--gold); }
-        .dropdown:hover .dropdown-content, .dropdown.open .dropdown-content { display: block; }
-        .dropdown-trigger { cursor: pointer; color: var(--white); font-weight: 600; padding: 12px 24px; }
+        @media(max-width:768px) {
+            header { flex-direction: column; padding: 15px; gap: 15px; }
+            .gallery-section { margin-top: 180px; }
+            .gallery-section h1 { font-size: 42px; }
+            .gallery-category h2 { font-size: 22px; margin-bottom: 20px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+            .lightbox-close { top: 20px; right: 25px; font-size: 35px; }
+            .lightbox-arrow { font-size: 40px; padding: 10px; }
+            .lightbox-arrow.left { left: 10px; }
+            .lightbox-arrow.right { right: 10px; }
+            
+            .dropdown { padding-bottom: 0; margin-bottom: 0; }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                background: rgba(20, 20, 20, 0.95);
+                box-shadow: none;
+                border: none;
+                margin-top: 10px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+            }
+            .dropdown.active .dropdown-content { display: flex; }
+            nav ul { flex-direction: column; width: 100%; text-align: center; gap: 5px; }
+            nav a { padding: 10px; display: block; }
+            nav li.active::after { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -365,16 +454,23 @@
                 <h2>Gepardy</h2>
             </div>
         </div>
+
         <nav>
             <ul>
-                <li><a href="index.html" class="back-btn">← Strona Główna</a></li>
-                <li class="dropdown">
+                <li><a href="index.html">Strona Główna</a></li>
+                <li class="dropdown active">
                     <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
                         <li>
                             <a href="o_klubie.html">
                                 <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 12.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
                                 O klubie
+                            </a>
+                        </li>
+                        <li>
+                            <a href="galeria.html">
+                                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                                Galeria
                             </a>
                         </li>
                         <li>
@@ -398,91 +494,525 @@
     <main class="gallery-section">
         <h1>Nasza Galeria</h1>
         <p>Przeżyj jeszcze raz najważniejsze sportowe chwile i wyjazdy Gepardów Białystok.</p>
-        
+
         <section class="gallery-category">
             <h2>Brno Open Game (25-28.06.2026)</h2>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox(0)">
+                
+                <div class="gallery-item" onclick="openLightbox('brno/1.jpg')">
                     <img src="brno/1.jpg" alt="Obóz Mazury 1" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
-                    <div class="gallery-overlay"><span>🔍</span></div>
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(1)">
+
+                <div class="gallery-item" onclick="openLightbox('brno/2.jpg')">
                     <img src="brno/2.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
-                    <div class="gallery-overlay"><span>🔍</span></div>
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(2)">
-                    <img src="brno/3.jpg" alt="Obóz Mazury 3" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
-                    <div class="gallery-overlay"><span>🔍</span></div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/3.jpg')">
+                    <img src="brno/3.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(3)">
-                    <img src="brno/4.jpg" alt="Obóz Mazury 4" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
-                    <div class="gallery-overlay"><span>🔍</span></div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/4.jpg')">
+                    <img src="brno/4.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(4)">
-                    <img src="brno/5.jpg" alt="Obóz Mazury 5" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
-                    <div class="gallery-overlay"><span>🔍</span></div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/5.jpg')">
+                    <img src="brno/5.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
                 </div>
+                <div class="gallery-item" onclick="openLightbox('brno/6.jpg')">
+                    <img src="brno/6.jpg" alt="Obóz Mazury 1" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/7.jpg')">
+                    <img src="brno/7.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/8.jpg')">
+                    <img src="brno/8.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/9.jpg')">
+                    <img src="brno/9.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('brno/10.jpg')">
+                    <img src="brno/10.jpg" alt="Obóz Mazury 1" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/11.jpg')">
+                    <img src="brno/11.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/12.jpg')">
+                    <img src="brno/12.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/13.jpg')">
+                    <img src="brno/13.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openLightbox('brno/14.jpg')">
+                    <img src="brno/14.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/15.jpg')">
+                    <img src="brno/15.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/16.jpg')">
+                    <img src="brno/16.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('brno/17.jpg')">
+                    <img src="brno/17.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="gallery-category">
+            <h2>Mistrzostwa Polski Młodziczek Poznań (10.05.2026)</h2>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/1.jpg')">
+                    <img src="Ms_P_Poznań/1.jpg" alt="Obóz Mazury 1" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/2.jpg')">
+                    <img src="Ms_P_Poznań/2.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/3.jpg')">
+                    <img src="Ms_P_Poznań/3.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/4.jpg')">
+                    <img src="Ms_P_Poznań/4.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/5.jpg')">
+                    <img src="Ms_P_Poznań/5.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/6.jpg')">
+                    <img src="Ms_P_Poznań/6.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/7.jpg')">
+                    <img src="Ms_P_Poznań/7.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/8.jpg')">
+                    <img src="Ms_P_Poznań/8.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/9.jpg')">
+                    <img src="Ms_P_Poznań/9.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/10.jpg')">
+                    <img src="Ms_P_Poznań/10.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/11.jpg')">
+                    <img src="Ms_P_Poznań/11.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/12.jpg')">
+                    <img src="Ms_P_Poznań/12.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/13.jpg')">
+                    <img src="Ms_P_Poznań/13.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/14.jpg')">
+                    <img src="Ms_P_Poznań/14.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Poznań/15.jpg')">
+                    <img src="Ms_P_Poznań/15.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="gallery-category">
+            <h2>Moje Małe Miatrzostwa Polski Łochów (21.06.2026)</h2>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/1.jpg')">
+                    <img src="M_M_Ms_P_Łochów/1.jpg" alt="Obóz Mazury 1" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/2.jpg')">
+                    <img src="M_M_Ms_P_Łochów/2.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/3.jpg')">
+                    <img src="M_M_Ms_P_Łochów/3.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/4.jpg')">
+                    <img src="M_M_Ms_P_Łochów/4.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/5.jpg')">
+                    <img src="M_M_Ms_P_Łochów/5.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/6.jpg')">
+                    <img src="M_M_Ms_P_Łochów/6.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/7.jpg')">
+                    <img src="M_M_Ms_P_Łochów/7.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/8.jpg')">
+                    <img src="M_M_Ms_P_Łochów/8.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/9.jpg')">
+                    <img src="M_M_Ms_P_Łochów/9.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_M_Ms_P_Łochów/10.jpg')">
+                    <img src="M_M_Ms_P_Łochów/10.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="gallery-category">
+            <h2>Mistrzostwa Polski Szkół Podstawowych Elbląg (5-7.06.2026)</h2>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Sp_Elbląg/1.jpg')">
+                    <img src="Ms_P_Sp_Elbląg/1.jpg" alt="Obóz Mazury 1" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Sp_Elbląg/2.jpg')">
+                    <img src="Ms_P_Sp_Elbląg/2.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Sp_Elbląg/3.jpg')">
+                    <img src="Ms_P_Sp_Elbląg/3.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Sp_Elbląg/4.jpg')">
+                    <img src="Ms_P_Sp_Elbląg/4.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Sp_Elbląg/5.jpg')">
+                    <img src="Ms_P_Sp_Elbląg/5.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Sp_Elbląg/6.jpg')">
+                    <img src="Ms_P_Sp_Elbląg/6.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+
+                <div class="gallery-item" onclick="openLightbox('Ms_P_Sp_Elbląg/7.jpg')">
+                    <img src="Ms_P_Sp_Elbląg/7.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                
+
+            </div>
+        </section>
+
+        <section class="gallery-category">
+            <h2>Mistrzostwo Ligi Mazowieckiej w sezonie 2025/2026</h2>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item" onclick="openLightbox('M_L_M_2025-2026/1.jpg')">
+                    <img src="M_L_M_2025-2026/1.jpg" alt="Obóz Mazury 1" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_L_M_2025-2026/2.jpg')">
+                    <img src="M_L_M_2025-2026/2.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_L_M_2025-2026/3.jpg')">
+                    <img src="M_L_M_2025-2026/3.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox('M_L_M_2025-2026/4.jpg')">
+                    <img src="M_L_M_2025-2026/4.jpg" alt="Obóz Mazury 2" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+                    <div class="gallery-overlay">
+                        <span>🔍</span>
+                    </div>
+                </div>
+
+                
+
+                
+
             </div>
         </section>
     </main>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-        <span class="lightbox-close" onclick="closeLightboxForce()">&times;</span>
-        <span class="lightbox-arrow left" onclick="prevImage(event)">&#8249;</span>
-        <img id="lightbox-img" class="lightbox-content" src="" alt="Powiększenie">
-        <span class="lightbox-arrow right" onclick="nextImage(event)">&#8250;</span>
+    <div id="galleryLightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-arrow left">&#10094;</span>
+        <img class="lightbox-content" id="lightboxImg" src="" alt="Powiększone zdjęcie">
+        <span class="lightbox-arrow right">&#10095;</span>
     </div>
 
     <script>
-        // Automatyczne zebranie adresów URL wszystkich zdjęć znajdujących się w siatce galerii
-        const images = Array.from(document.querySelectorAll('.gallery-grid .gallery-item img')).map(img => img.getAttribute('src'));
-        let currentIndex = 0;
+        document.addEventListener('DOMContentLoaded', () => {
+            // OBSŁUGA DROPDOWN MENU (Identyczna jak na index)
+            const dropdown = document.querySelector('.dropdown');
+            const trigger = document.querySelector('.dropdown-trigger');
 
-        function openLightbox(index) {
-            currentIndex = index;
-            updateLightboxImage();
-            document.getElementById('lightbox').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Zablokowanie przewijania strony w tle
-        }
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
 
-        function updateLightboxImage() {
-            document.getElementById('lightbox-img').src = images[currentIndex];
-        }
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
 
-        function closeLightboxForce() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Przywrócenie przewijania strony
-        }
+            // ZAAWANSOWANA OBSŁUGA DYNAMICZNEJ GALERII (LIGHTBOX) Z PRZEWIJANIEM
+            const lightbox = document.getElementById('galleryLightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeBtn = document.querySelector('.lightbox-close');
+            const arrowLeft = document.querySelector('.lightbox-arrow.left');
+            const arrowRight = document.querySelector('.lightbox-arrow.right');
+            
+            // Pobranie wszystkich elementów graficznych w siatkach galerii
+            const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+            let currentImgIndex = 0;
 
-        function closeLightbox(event) {
-            // Zamknij okno tylko, jeśli kliknięcie nastąpiło bezpośrednio na ciemne tło
-            if (event.target.id === 'lightbox') {
-                closeLightboxForce();
+            // Funkcja aktualizująca wyświetlane zdjęcie w Lightboxie
+            function updateLightboxImage(index) {
+                currentImgIndex = index;
+                const imgElement = galleryItems[currentImgIndex].querySelector('img');
+                // Jeśli obrazek ma src, załaduj go, w przeciwnym wypadku wyczyść
+                if(imgElement.src) {
+                    lightboxImg.src = imgElement.src;
+                } else {
+                    lightboxImg.src = "";
+                }
             }
-        }
 
-        function prevImage(event) {
-            if (event) event.stopPropagation(); // Zapobieganie zamknięciu okna przy kliknięciu w strzałkę
-            currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
-            updateLightboxImage();
-        }
+            // Otwieranie okna po kliknięciu na dowolny kafelek ze zdjęciem
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    lightbox.style.display = 'flex';
+                    updateLightboxImage(index);
+                });
+            });
 
-        function nextImage(event) {
-            if (event) event.stopPropagation(); // Zapobieganie zamknięciu okna przy kliknięciu w strzałkę
-            currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
-            updateLightboxImage();
-        }
-
-        // Integracja z klawiaturą (Esc, Strzałka w lewo, Strzałka w prawo)
-        document.addEventListener('keydown', (e) => {
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox.style.display === 'flex') {
-                if (e.key === 'ArrowRight') nextImage();
-                if (e.key === 'ArrowLeft') prevImage();
-                if (e.key === 'Escape') closeLightboxForce();
+            // Funkcje nawigacji: Poprzednie / Następne zdjęcie
+            function showPrevImage() {
+                let newIndex = currentImgIndex - 1;
+                if (newIndex < 0) newIndex = galleryItems.length - 1; // Pętla na koniec
+                updateLightboxImage(newIndex);
             }
+
+            function showNextImage() {
+                let newIndex = currentImgIndex + 1;
+                if (newIndex >= galleryItems.length) newIndex = 0; // Pętla na początek
+                updateLightboxImage(newIndex);
+            }
+
+            // Zdarzenia kliknięcia w strzałki ekranowe
+            arrowLeft.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showPrevImage();
+            });
+
+            arrowRight.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showNextImage();
+            });
+
+            // Zamknięcie lightboxa przyciskiem X
+            closeBtn.addEventListener('click', () => {
+                lightbox.style.display = 'none';
+            });
+
+            // Zamknięcie lightboxa po kliknięciu w tło obok zdjęcia
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.style.display = 'none';
+                }
+            });
+
+            // Obsługa fizycznych klawiszy klawiatury (Strzałki lewo/prawo oraz Esc)
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.style.display === 'flex') {
+                    if (e.key === 'ArrowLeft') {
+                        showPrevImage();
+                    } else if (e.key === 'ArrowRight') {
+                        showNextImage();
+                    } else if (e.key === 'Escape') {
+                        lightbox.style.display = 'none';
+                    }
+                }
+            });
         });
     </script>
-
 </body>
+</html>
 </html>
