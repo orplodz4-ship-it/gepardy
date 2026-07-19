@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klub Gepardy Białystok - Partnerzy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&display=swap" rel="stylesheet">
     <style>
         /* ===========================
-           ZMIENNE I RESET (Z Twojego nowego stylu)
+           ZMIENNE I RESET (Spójne z resztą strony)
         =========================== */
         :root {
             --black: #0f0f0f;
@@ -34,10 +37,12 @@
             color: var(--white);
             background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* ===========================
-           NAVBAR / HEADER
+           NAVBAR / HEADER & DROPDOWN
         =========================== */
         header {
             position: fixed;
@@ -61,40 +66,96 @@
 
         .logo img {
             width: 65px;
+            height: auto;
+        }
+
+        .logo-text span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            display: block;
+            margin-bottom: -5px;
         }
 
         .logo h2 {
             color: var(--gold);
-            font-size: 30px;
+            font-family: 'Teko', sans-serif;
+            font-size: 36px;
             letter-spacing: 2px;
             text-transform: uppercase;
+            line-height: 1;
         }
 
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
+            gap: 10px;
         }
 
-        nav a {
+        nav a, .dropdown-trigger {
             color: var(--white);
             text-decoration: none;
             padding: 12px 24px;
             font-weight: 600;
             border: 1px solid transparent;
-            border-radius: 30px;
+            border-radius: 4px;
             transition: .3s;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
         }
 
-        /* Przycisk powrotu stylizowany na delikatną ramkę */
-        nav a.back-btn {
-            border-color: rgba(212, 160, 47, .4);
+        nav a:hover, .dropdown-trigger:hover, .dropdown.active .dropdown-trigger {
             color: var(--gold);
         }
 
-        nav a.back-btn:hover {
-            background: var(--gold);
-            color: var(--black);
-            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
+        /* Obsługa Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #111111;
+            border: 1px solid #222222;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            min-width: 200px;
+            border-radius: 4px;
+            margin-top: 10px;
+            flex-direction: column;
+            list-style: none;
+            padding: 5px 0;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: flex;
+        }
+
+        .dropdown-content li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 0;
+            text-transform: uppercase;
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .dropdown-content li a:hover {
+            background: #1c1c1c;
+            color: var(--gold);
+        }
+
+        .dropdown-content svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         /* ===========================
@@ -102,41 +163,43 @@
         =========================== */
         .partners {
             width: 90%;
-            max-width: 1400px;
-            margin: 160px auto 80px; /* Zwiększony margines, żeby nagłówek nie zasłaniał h1 */
+            max-width: 1200px;
+            margin: 160px auto 60px;
             padding: 20px;
+            flex: 1;
         }
 
         .partners h1 {
             text-align: center;
-            font-size: 58px;
+            font-family: 'Teko', sans-serif;
+            font-size: 72px;
             color: var(--gold);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 15px;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+            line-height: 1;
         }
 
         .partners p {
             text-align: center;
             color: var(--gray);
-            font-size: 20px;
-            margin-bottom: 70px;
+            font-size: 18px;
+            margin-bottom: 60px;
         }
 
         /* SIATKA KAFELKÓW */
         .partners-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
         }
 
-        /* KAFELEK PARTNERA */
+        /* KAFELEK PARTNERA (Ostre kształty premium) */
         .partner-card {
             position: relative;
             background: linear-gradient(180deg, #1b1b1b, #0a0a0a);
-            border: 2px solid rgba(212, 160, 47, .35);
-            border-radius: 22px;
+            border: 1px solid rgba(212, 160, 47, .25);
+            border-radius: 6px;
             padding: 45px 30px;
             text-align: center;
             overflow: hidden;
@@ -149,8 +212,9 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 6px 6px 0 0;
         }
 
         .partner-card::before {
@@ -160,7 +224,7 @@
             left: -60%;
             width: 70%;
             height: 300%;
-            background: rgba(255, 255, 255, .08);
+            background: rgba(255, 255, 255, .05);
             transform: rotate(25deg);
             transition: .8s;
         }
@@ -170,24 +234,19 @@
         }
 
         .partner-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--gold);
-            box-shadow:
-                0 0 30px rgba(212, 160, 47, .25),
-                0 20px 35px rgba(0, 0, 0, .65);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 160, 47, 0.15);
         }
 
-        /* RAMKA NA LOGO (Dla kwadratowych logotypów) */
+        /* RAMKA NA LOGO */
         .partner-logo {
-            width: 200px;
-            height: 140px;
-            margin: 0 auto 30px;
-            border-radius: 16px;
-            background: radial-gradient(circle at center, 
-                rgba(212, 160, 47, .15) 0%, 
-                rgba(212, 160, 47, .05) 70%, 
-                transparent 100%);
-            border: 2px solid rgba(212, 160, 47, .35);
+            width: 180px;
+            height: 120px;
+            margin: 0 auto 25px;
+            border-radius: 4px;
+            background: radial-gradient(circle at center, rgba(212, 160, 47, .1) 0%, rgba(0, 0, 0, 0.4) 80%);
+            border: 1px solid rgba(212, 160, 47, .2);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -197,9 +256,9 @@
         }
 
         .partner-card:hover .partner-logo {
-            transform: scale(1.05);
+            transform: scale(1.03);
             border-color: var(--gold);
-            box-shadow: 0 0 25px rgba(212, 160, 47, .30);
+            box-shadow: 0 0 20px rgba(212, 160, 47, .15);
         }
 
         .partner-logo img {
@@ -210,9 +269,12 @@
 
         /* NAZWA PARTNERA */
         .partner-card h3 {
+            font-family: 'Teko', sans-serif;
             color: var(--white);
-            font-size: 28px;
-            margin-bottom: 12px;
+            font-size: 32px;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
         /* RANGA SPONSORA */
@@ -220,7 +282,7 @@
             display: block;
             color: var(--gold);
             margin-bottom: 30px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -229,49 +291,59 @@
         /* PRZYCISK KAFELKA */
         .partner-card a {
             display: inline-block;
-            padding: 14px 34px;
-            background: var(--gold);
-            color: var(--black);
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--gold);
             text-decoration: none;
             font-weight: bold;
-            border-radius: 40px;
+            border: 1px solid var(--gold);
+            border-radius: 4px;
             transition: .3s;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
         }
 
         .partner-card a:hover {
-            background: var(--gold-light);
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px var(--gold);
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
+        }
+
+        /* STOPKA */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border-top: 1px solid #1a1a1a;
+            color: #555;
+            font-size: 13px;
         }
 
         /* RESPONSYWNOŚĆ */
-        @media(max-width:768px){
+        @media(max-width: 992px) {
+            header {
+                padding: 15px 30px;
+            }
+        }
+
+        @media(max-width: 768px){
             header {
                 flex-direction: column;
-                padding: 15px 20px;
                 gap: 15px;
-            }
-
-            .logo h2 {
-                font-size: 24px;
+                position: static;
             }
 
             .partners {
-                margin-top: 180px; /* Więcej miejsca na telefonach przez pionowy układ headera */
+                margin-top: 40px;
             }
 
             .partners h1 {
-                font-size: 42px;
+                font-size: 52px;
             }
 
             .partners-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .partner-logo {
-                width: 160px;
-                height: 110px;
-                margin-bottom: 20px;
             }
         }
     </style>
@@ -289,7 +361,7 @@
 
         <nav>
             <ul>
-                <li class="active"><a href="#">Strona Główna</a></li>
+                <li><a href="index.html">Strona Główna</a></li>
                 <li class="dropdown">
                     <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
@@ -299,7 +371,6 @@
                                 O klubie
                             </a>
                         </li>
-                        
                         <li>
                             <a href="galeria.html">
                                 <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
@@ -324,9 +395,9 @@
         </nav>
     </header>
 
-    <section class="partners">
+    <main class="partners">
         <h1>Nasi Partnerzy</h1>
-        <p>Firmy i instytucje wspierające Klub Gepardy Białystok.</p>
+        <p>Firmy i instytucje wspierające Klub Unihokeja Gepardy Białystok.</p>
 
         <div class="partners-grid">
             
@@ -340,8 +411,13 @@
             </div>
 
         </div>
-    </section>
-<script>
+    </main>
+
+    <footer>
+        &copy; 2026 Klub Unihokeja Gepardy Białystok
+    </footer>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const dropdown = document.querySelector('.dropdown');
             const trigger = document.querySelector('.dropdown-trigger');
