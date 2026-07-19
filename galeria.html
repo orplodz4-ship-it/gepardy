@@ -6,7 +6,7 @@
     <title>Klub Gepardy Białystok - Galeria</title>
     <style>
         /* ==========================================
-           ZMIENNE I BAZOWE USTAWIENIA (Pełna spójność z index)
+           ZMIENNE I BAZOWE USTAWIENIA (Klon z index)
         ========================================== */
         :root {
             --black: #0a0a0a;
@@ -31,13 +31,13 @@
         body {
             background-color: var(--black);
             color: var(--white);
-            overflow-x: hidden;
             background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* ==========================================
-           NAVBAR (NAGŁÓWEK - Identyczny jak na index.html)
+           NAVBAR (IDENTYCZNY JAK W INDEX)
         ========================================== */
         header {
             position: fixed;
@@ -112,14 +112,19 @@
             color: var(--gold);
         }
 
-        nav li.active::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 24px;
-            width: calc(100% - 48px);
-            height: 3px;
+        /* Dedykowany, stylowy przycisk powrotu w lewej części nav */
+        nav a.back-btn {
+            border: 1px solid rgba(212, 160, 47, .4);
+            border-radius: 4px;
+            color: var(--gold);
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+
+        nav a.back-btn:hover {
             background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
         }
 
         /* DROPDOWN (MENU ROZWIJANE) */
@@ -247,6 +252,7 @@
             letter-spacing: 1px;
         }
 
+        /* SIATKA ZDJĘĆ */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -329,7 +335,7 @@
         }
 
         /* ==========================================
-           LIGHTBOX Z OBSŁUGĄ PRZEWIJANIA (STRZAŁKI)
+           LIGHTBOX (PODGLĄD MODALNY)
         ========================================== */
         .lightbox {
             display: none;
@@ -342,15 +348,17 @@
             background-color: rgba(10, 10, 10, 0.96);
             justify-content: center;
             align-items: center;
+            cursor: zoom-out;
         }
 
         .lightbox-content {
-            max-width: 85%;
+            max-width: 90%;
             max-height: 85vh;
             border: 3px solid var(--gold);
             border-radius: 12px;
             box-shadow: 0 0 40px rgba(212, 160, 47, 0.4);
             object-fit: contain;
+            cursor: default;
             animation: zoomEffect 0.3s ease;
         }
 
@@ -364,41 +372,11 @@
             cursor: pointer;
             transition: 0.3s;
             user-select: none;
-            z-index: 1010;
         }
 
         .lightbox-close:hover {
             color: var(--gold);
             transform: scale(1.1);
-        }
-
-        /* EKRANOWE STRZAŁKI NAWIGACJI */
-        .lightbox-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--white);
-            font-size: 60px;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none;
-            padding: 20px;
-            transition: 0.3s ease;
-            z-index: 1005;
-            text-shadow: 0 0 15px rgba(0,0,0,0.8);
-        }
-
-        .lightbox-arrow:hover {
-            color: var(--gold);
-            transform: translateY(-50%) scale(1.15);
-        }
-
-        .lightbox-arrow.left {
-            left: 30px;
-        }
-
-        .lightbox-arrow.right {
-            right: 30px;
         }
 
         @keyframes zoomEffect {
@@ -413,16 +391,17 @@
             header { padding: 15px 30px; }
         }
 
-        @media(max-width:768px) {
-            header { flex-direction: column; padding: 15px; gap: 15px; }
-            .gallery-section { margin-top: 180px; }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .gallery-section { margin-top: 200px; }
             .gallery-section h1 { font-size: 42px; }
             .gallery-category h2 { font-size: 22px; margin-bottom: 20px; }
             .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
             .lightbox-close { top: 20px; right: 25px; font-size: 35px; }
-            .lightbox-arrow { font-size: 40px; padding: 10px; }
-            .lightbox-arrow.left { left: 10px; }
-            .lightbox-arrow.right { right: 10px; }
             
             .dropdown { padding-bottom: 0; margin-bottom: 0; }
             .dropdown-content {
@@ -438,9 +417,13 @@
                 display: none;
             }
             .dropdown.active .dropdown-content { display: flex; }
-            nav ul { flex-direction: column; width: 100%; text-align: center; gap: 5px; }
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                gap: 5px;
+            }
             nav a { padding: 10px; display: block; }
-            nav li.active::after { display: none; }
         }
     </style>
 </head>
@@ -457,8 +440,8 @@
 
         <nav>
             <ul>
-                <li><a href="index.html">Strona Główna</a></li>
-                <li class="dropdown active">
+                <li><a href="index.html" class="back-btn">← Strona Główna</a></li>
+                <li class="dropdown">
                     <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
                         <li>
@@ -467,8 +450,8 @@
                                 O klubie
                             </a>
                         </li>
-                        <li>
-                            <a href="galeria.html">
+                        <li class="active">
+                            <a href="#">
                                 <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                                 Galeria
                             </a>
@@ -908,16 +891,30 @@
         </section>
     </main>
 
-    <div id="galleryLightbox" class="lightbox">
-        <span class="lightbox-close">&times;</span>
-        <span class="lightbox-arrow left">&#10094;</span>
-        <img class="lightbox-content" id="lightboxImg" src="" alt="Powiększone zdjęcie">
-        <span class="lightbox-arrow right">&#10095;</span>
+    <div id="galleryLightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" onclick="event.stopPropagation()">
     </div>
+
+    <footer>
+        <div class="footer-divider">
+            <div class="footer-badge">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 14c-1.66 0-3 1.34-3 3 0 2 2 4 3 4s3-2 3-4c0-1.66-1.34-3-3-3zm-4.5-2c-1.1 0-2-.9-2-2s1.5-3 2-3 2 1.9 2 3-.9 2-2 2zm9 0c-1.1 0-2-.9-2-2s.9-3 2-3 2 1.9 2 3-.9 2-2 2z"/>
+                </svg>
+            </div>
+        </div>
+        <p>© 2026 Gepardy Białystok Klub Unihokeja</p>
+        <div class="partners-footer">
+            <h4>Wspierają nas:</h4>
+            <a href="https://www.facebook.com/wojpodlaskie" target="_blank" rel="noopener noreferrer">
+                <img src="podlaskie.jpg" alt="Podlaskie Województwo">
+            </a>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // OBSŁUGA DROPDOWN MENU (Identyczna jak na index)
             const dropdown = document.querySelector('.dropdown');
             const trigger = document.querySelector('.dropdown-trigger');
 
@@ -931,87 +928,21 @@
                     dropdown.classList.remove('active');
                 }
             });
+        });
 
-            // ZAAWANSOWANA OBSŁUGA DYNAMICZNEJ GALERII (LIGHTBOX) Z PRZEWIJANIEM
+        function openLightbox(imgSrc) {
             const lightbox = document.getElementById('galleryLightbox');
             const lightboxImg = document.getElementById('lightboxImg');
-            const closeBtn = document.querySelector('.lightbox-close');
-            const arrowLeft = document.querySelector('.lightbox-arrow.left');
-            const arrowRight = document.querySelector('.lightbox-arrow.right');
-            
-            // Pobranie wszystkich elementów graficznych w siatkach galerii
-            const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-            let currentImgIndex = 0;
+            lightboxImg.src = imgSrc;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
 
-            // Funkcja aktualizująca wyświetlane zdjęcie w Lightboxie
-            function updateLightboxImage(index) {
-                currentImgIndex = index;
-                const imgElement = galleryItems[currentImgIndex].querySelector('img');
-                // Jeśli obrazek ma src, załaduj go, w przeciwnym wypadku wyczyść
-                if(imgElement.src) {
-                    lightboxImg.src = imgElement.src;
-                } else {
-                    lightboxImg.src = "";
-                }
-            }
-
-            // Otwieranie okna po kliknięciu na dowolny kafelek ze zdjęciem
-            galleryItems.forEach((item, index) => {
-                item.addEventListener('click', () => {
-                    lightbox.style.display = 'flex';
-                    updateLightboxImage(index);
-                });
-            });
-
-            // Funkcje nawigacji: Poprzednie / Następne zdjęcie
-            function showPrevImage() {
-                let newIndex = currentImgIndex - 1;
-                if (newIndex < 0) newIndex = galleryItems.length - 1; // Pętla na koniec
-                updateLightboxImage(newIndex);
-            }
-
-            function showNextImage() {
-                let newIndex = currentImgIndex + 1;
-                if (newIndex >= galleryItems.length) newIndex = 0; // Pętla na początek
-                updateLightboxImage(newIndex);
-            }
-
-            // Zdarzenia kliknięcia w strzałki ekranowe
-            arrowLeft.addEventListener('click', (e) => {
-                e.stopPropagation();
-                showPrevImage();
-            });
-
-            arrowRight.addEventListener('click', (e) => {
-                e.stopPropagation();
-                showNextImage();
-            });
-
-            // Zamknięcie lightboxa przyciskiem X
-            closeBtn.addEventListener('click', () => {
-                lightbox.style.display = 'none';
-            });
-
-            // Zamknięcie lightboxa po kliknięciu w tło obok zdjęcia
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) {
-                    lightbox.style.display = 'none';
-                }
-            });
-
-            // Obsługa fizycznych klawiszy klawiatury (Strzałki lewo/prawo oraz Esc)
-            document.addEventListener('keydown', (e) => {
-                if (lightbox.style.display === 'flex') {
-                    if (e.key === 'ArrowLeft') {
-                        showPrevImage();
-                    } else if (e.key === 'ArrowRight') {
-                        showNextImage();
-                    } else if (e.key === 'Escape') {
-                        lightbox.style.display = 'none';
-                    }
-                }
-            });
-        });
+        function closeLightbox() {
+            const lightbox = document.getElementById('galleryLightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     </script>
 </body>
 </html>
