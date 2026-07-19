@@ -322,29 +322,62 @@
                 font-size: 35px;
             }
         }
+
+        /* ==========================================
+           NOWE STYLE DLA DROPDOWN (WKLEJONE TUTAJ)
+           ========================================== */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
         .dropdown-content {
-    display: none;
-    position: absolute;
-    background: var(--dark);
-    border: 1px solid var(--gold);
-    border-radius: 8px;
-    list-style: none;
-    padding: 10px 0;
-    min-width: 180px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-}
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--dark);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            list-style: none;
+            padding: 10px 0;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
 
-/* Pokazywanie na desktopie po najechaniu lub na mobile po dodaniu klasy przez JS */
-.dropdown:hover .dropdown-content,
-.dropdown.open .dropdown-content {
-    display: block;
-}
+        .dropdown-content li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 0;
+        }
 
-.dropdown-trigger {
-    cursor: pointer;
-    color: var(--white);
-    font-weight: 600;
-}
+        .dropdown-content li a:hover {
+            background: rgba(212, 160, 47, 0.1);
+            color: var(--gold);
+        }
+
+        .dropdown-content svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--gold);
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown.open .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-trigger {
+            cursor: pointer;
+            color: var(--white);
+            font-weight: 600;
+            padding: 12px 24px;
+        }
     </style>
 </head>
 <body>
@@ -819,52 +852,17 @@
 
     <script>
         // Otwiera podgląd po kliknięciu
-        function openLightbox(imageSrc) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            
-            lightboxImg.src = imageSrc;
-            lightbox.style.display = 'flex';
-            
-            // Zablokuj przewijanie tła, gdy zdjęcie jest otwarte
-            document.body.style.overflow = 'hidden';
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Wyłącza przewijanie tła
         }
 
-        // Zamyka podgląd po kliknięciu na X, obok zdjęcia lub klawiszem ESC
+        // Zamyka podgląd
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.style.display = 'none';
-            
-            // Przywróć przewijanie strony
-            document.body.style.overflow = 'auto';
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Przywraca przewijanie tła
         }
-
-        // Zamykanie klawiszem ESC (wygodne dla użytkowników komputerów)
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeLightbox();
-            }
-        });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const dropdown = document.querySelector('.dropdown');
-            const trigger = document.querySelector('.dropdown-trigger');
-
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dropdown.classList.toggle('active');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.classList.remove('active');
-                }
-            });
-        });
-    </script>
-    
-    
-
 </body>
 </html>
