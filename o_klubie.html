@@ -23,7 +23,7 @@
         body {
             background-color: var(--black);
             color: var(--white);
-            padding-top: 120px;
+            padding-top: 140px;
         }
 
         header {
@@ -40,107 +40,64 @@
             z-index: 999;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .logo { display: flex; align-items: center; gap: 15px; }
+        .logo img { height: 70px; }
+        .logo-text h2 { color: var(--gold); font-size: 28px; text-transform: uppercase; font-weight: 900; }
 
-        .logo img {
-            height: 70px;
-        }
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav a { color: var(--white); text-decoration: none; padding: 12px 24px; font-weight: 700; text-transform: uppercase; }
+        nav a.back-btn { border: 1px solid rgba(212, 160, 47, .4); border-radius: 30px; color: var(--gold); }
+        nav a.back-btn:hover { background: var(--gold); color: var(--black); }
 
-        .logo-text h2 {
-            color: var(--gold);
-            font-size: 28px;
-            text-transform: uppercase;
-            font-weight: 900;
-        }
+        .dropdown { position: relative; }
+        .dropdown-trigger { cursor: pointer; padding: 12px 24px; font-weight: 700; text-transform: uppercase; }
+        .dropdown-content { display: none; position: absolute; top: 100%; right: 0; background: #141414; border: 1px solid var(--gold); list-style: none; min-width: 200px; padding: 10px 0; }
+        .dropdown-content a { display: block; padding: 10px 20px; color: var(--white); text-decoration: none; text-transform: uppercase; font-size: 13px; font-weight: 600; }
+        .dropdown-content a:hover { background: rgba(212, 160, 47, 0.1); color: var(--gold); }
+        .dropdown:hover .dropdown-content { display: block; }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
-
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            padding: 12px 24px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        nav a.back-btn {
-            border: 1px solid rgba(212, 160, 47, .4);
-            border-radius: 30px;
-            color: var(--gold);
-        }
-
-        nav a.back-btn:hover {
-            background: var(--gold);
-            color: var(--black);
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-trigger {
-            cursor: pointer;
-            padding: 12px 24px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: #141414;
-            border: 1px solid var(--gold);
-            list-style: none;
-            min-width: 200px;
-            padding: 10px 0;
-        }
-
-        .dropdown-content a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
-            font-size: 14px;
-        }
-
-        .dropdown-content svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--gold);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        main {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
         }
 
         h1 {
             color: var(--gold);
-            font-size: 42px;
+            font-size: 48px;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(212, 160, 47, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #dcdcdc;
             margin-bottom: 20px;
         }
 
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: var(--gray);
-            margin-bottom: 20px;
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        @media(max-width: 768px) {
+            header { flex-direction: column; padding: 15px; gap: 10px; }
+            body { padding-top: 180px; }
+            .about-content { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -149,9 +106,7 @@
     <header>
         <div class="logo">
             <img src="logo.png" alt="Gepardy Logo">
-            <div class="logo-text">
-                <h2>Gepardy</h2>
-            </div>
+            <div class="logo-text"><h2>Gepardy</h2></div>
         </div>
         <nav>
             <ul>
@@ -159,35 +114,28 @@
                 <li class="dropdown">
                     <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
-                        <li>
-                            <a href="galeria.html">
-                                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
-                                Galeria
-                            </a>
-                        </li>
-                        <li>
-                            <a href="partnerzy.html">
-                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
-                                Partnerzy
-                            </a>
-                        </li>
-                        <li>
-                            <a href="kontakt.html">
-                                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                                Kontakt
-                            </a>
-                        </li>
+                        <li><a href="galeria.html">Galeria</a></li>
+                        <li><a href="partnerzy.html">Partnerzy</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <div class="about-container">
         <h1>O klubie</h1>
-        <p>Klub Unihokeja Gepardy Białystok powstał z pasji do dynamicznego i widowiskowego sportu, jakim jest unihokej. Naszym celem jest popularyzacja tej dyscypliny na Podlasiu oraz szkolenie młodzieży i dorosłych.</p>
-        <p>Jako oficjalna Fundacja Gepardy Białystok skupiamy wokół siebie zawodników pełnych zaangażowania i woli walki, którzy dumnie reprezentują nasze miasto w ogólnokrajowych oraz międzynarodowych turniejach i rozgrywkach.</p>
-    </main>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Klub Unihokeja Gepardy Białystok powstał z czystej pasji do unihokeja. Naszym nadrzędnym celem jest popularyzacja tej wspaniałej, dynamicznej i rozwijającej dyscypliny sportowej na terenie całego województwa podlaskiego.</p>
+                <p>Jako oficjalnie zarejestrowana Fundacja Gepardy Białystok, kładziemy ogromny nacisk na profesjonalny rozwój sportowy, zaszczepianie ducha rywalizacji fair play oraz budowanie silnej społeczności.</p>
+                <p>Nasza drużyna to zgrana rodzina zawodników pełnych determinacji, woli walki i sportowego zacięcia, którzy dumnie i z pełnym zaangażowaniem reprezentują Białystok zarówno w ogólnopolskich turniejach ligowych, jak i na prestiżowych turniejach międzynarodowych.</p>
+            </div>
+            <div class="about-image">
+                <img src="brno/1.jpg" alt="Zdjęcie drużynowe Gepardy Białystok">
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
