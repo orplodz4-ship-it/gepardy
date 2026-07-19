@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klub Gepardy Białystok - Galeria</title>
     <style>
-        /* ===========================
-           ZMIENNE I RESET (Spójne z resztą strony)
-        =========================== */
+        /* ==========================================
+           ZMIENNE I BAZOWE USTAWIENIA (Pełna spójność z index)
+        ========================================== */
         :root {
-            --black: #0f0f0f;
-            --dark: #1b1b1b;
+            --black: #0a0a0a;
+            --dark-card: #141414;
             --gold: #d4a02f;
-            --gold-light: #f0c14b;
-            --red: #8d1010;
+            --gold-light: #f5c453;
             --white: #ffffff;
-            --gray: #d8d8d8;
+            --gray: #a0a0a0;
         }
 
         * {
@@ -30,15 +29,16 @@
         }
 
         body {
-            background: var(--black);
+            background-color: var(--black);
             color: var(--white);
+            overflow-x: hidden;
             background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
             min-height: 100vh;
         }
 
-        /* ===========================
-           NAVBAR / HEADER
-        =========================== */
+        /* ==========================================
+           NAVBAR (NAGŁÓWEK - Identyczny jak na index.html)
+        ========================================== */
         header {
             position: fixed;
             top: 0;
@@ -60,45 +60,155 @@
         }
 
         .logo img {
-            width: 65px;
+            height: 70px;
+            width: auto;
         }
 
-        .logo h2 {
-            color: var(--gold);
-            font-size: 30px;
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text span {
+            font-size: 14px;
+            color: var(--white);
+            font-weight: 800;
             letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo-text h2 {
+            color: var(--gold);
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            line-height: 1;
             text-transform: uppercase;
         }
 
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav li {
+            position: relative;
         }
 
         nav a {
             color: var(--white);
             text-decoration: none;
             padding: 12px 24px;
-            font-weight: 600;
-            border: 1px solid transparent;
-            border-radius: 30px;
-            transition: .3s;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: .3s ease;
         }
 
-        nav a.back-btn {
-            border-color: rgba(212, 160, 47, .4);
+        nav a:hover, nav li.active a {
             color: var(--gold);
         }
 
-        nav a.back-btn:hover {
+        nav li.active::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 24px;
+            width: calc(100% - 48px);
+            height: 3px;
             background: var(--gold);
-            color: var(--black);
-            box-shadow: 0 0 15px rgba(212, 160, 47, 0.4);
         }
 
-        /* ===========================
+        /* DROPDOWN (MENU ROZWIJANE) */
+        .dropdown {
+            padding-bottom: 15px;
+            margin-bottom: -15px; 
+        }
+
+        .dropdown-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            color: var(--white);
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .dropdown-trigger:hover {
+            color: var(--gold);
+        }
+
+        .dropdown-content {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            background: rgba(15, 15, 15, 0.98);
+            min-width: 260px;
+            border: 1px solid rgba(212, 160, 47, 0.4);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            padding: 10px 0;
+            z-index: 1001;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-content li {
+            width: 100%;
+        }
+
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 25px;
+            font-size: 13px;
+            color: var(--white);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: 0.25s;
+        }
+
+        .dropdown-content a svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--gold);
+            transition: 0.25s;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(212, 160, 47, 0.1);
+            color: var(--gold);
+        }
+
+        .dropdown-content a:hover svg {
+            fill: var(--gold-light);
+            transform: scale(1.1);
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown.active .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* ==========================================
            GŁÓWNA SEKCJA GALERII
-        =========================== */
+        ========================================== */
         .gallery-section {
             width: 90%;
             max-width: 1400px;
@@ -123,14 +233,10 @@
             margin-bottom: 70px;
         }
 
-        /* ===========================
-           KATEGORIE / WYDARZENIA
-        =========================== */
         .gallery-category {
             margin-bottom: 80px;
         }
 
-        /* Elegancka linia boczna obok nazwy wyjazdu */
         .gallery-category h2 {
             font-size: 28px;
             color: var(--gold);
@@ -141,27 +247,24 @@
             letter-spacing: 1px;
         }
 
-        /* SIATKA ZDJĘĆ */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
-        /* POJEDYNCZE ZDJĘCIE (KAFELEK) */
         .gallery-item {
             position: relative;
             background: #111;
             border: 2px solid rgba(212, 160, 47, .35);
             border-radius: 18px;
-            aspect-ratio: 4 / 3; /* Proporcje zdjęcia 4:3, aby kafelki były idealnie równe */
+            aspect-ratio: 4 / 3;
             overflow: hidden;
             cursor: pointer;
             transition: .35s;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
 
-        /* Złoty pasek u góry przy najechaniu */
         .gallery-item::after {
             content: "";
             position: absolute;
@@ -177,17 +280,14 @@
         .gallery-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Wypełnia kadr bez rozciągania */
+            object-fit: cover;
             transition: .5s ease;
         }
 
-        /* Efekty po najechaniu */
         .gallery-item:hover {
             transform: translateY(-8px);
             border-color: var(--gold);
-            box-shadow: 
-                0 0 25px rgba(212, 160, 47, .25),
-                0 15px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 0 25px rgba(212, 160, 47, .25), 0 15px 30px rgba(0,0,0,0.6);
         }
 
         .gallery-item:hover::after {
@@ -199,7 +299,6 @@
             filter: brightness(1.1);
         }
 
-        /* Nakładka z ikonką lupy przy najechaniu */
         .gallery-overlay {
             position: absolute;
             top: 0;
@@ -229,11 +328,11 @@
             transform: scale(1);
         }
 
-        /* ===========================
-           LIGHTBOX / OKNO PODGLĄDU ZDJĘCIA
-        =========================== */
+        /* ==========================================
+           LIGHTBOX Z OBSŁUGĄ PRZEWIJANIA (STRZAŁKI)
+        ========================================== */
         .lightbox {
-            display: none; /* Domyślnie ukryte */
+            display: none;
             position: fixed;
             z-index: 1000;
             top: 0;
@@ -243,22 +342,18 @@
             background-color: rgba(10, 10, 10, 0.96);
             justify-content: center;
             align-items: center;
-            cursor: zoom-out;
         }
 
-        /* Powiększony obrazek */
         .lightbox-content {
-            max-width: 90%;
+            max-width: 85%;
             max-height: 85vh;
             border: 3px solid var(--gold);
             border-radius: 12px;
             box-shadow: 0 0 40px rgba(212, 160, 47, 0.4);
             object-fit: contain;
-            cursor: default;
             animation: zoomEffect 0.3s ease;
         }
 
-        /* Guzik X w prawym górnym rogu */
         .lightbox-close {
             position: absolute;
             top: 30px;
@@ -269,6 +364,7 @@
             cursor: pointer;
             transition: 0.3s;
             user-select: none;
+            z-index: 1010;
         }
 
         .lightbox-close:hover {
@@ -276,107 +372,75 @@
             transform: scale(1.1);
         }
 
-        /* Płynne otwieranie */
-        @keyframes zoomEffect {
-            from {
-                transform: scale(0.95);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+        /* EKRANOWE STRZAŁKI NAWIGACJI */
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
+            font-size: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            padding: 20px;
+            transition: 0.3s ease;
+            z-index: 1005;
+            text-shadow: 0 0 15px rgba(0,0,0,0.8);
         }
 
-        /* ===========================
-           RESPONSYWNOŚĆ (Ekrany mobilne)
-        =========================== */
-        @media(max-width:768px) {
-            header {
-                flex-direction: column;
-                padding: 15px 20px;
-                gap: 15px;
-            }
+        .lightbox-arrow:hover {
+            color: var(--gold);
+            transform: translateY(-50%) scale(1.15);
+        }
 
-            .gallery-section {
-                margin-top: 180px;
-            }
+        .lightbox-arrow.left {
+            left: 30px;
+        }
 
-            .gallery-section h1 {
-                font-size: 42px;
-            }
+        .lightbox-arrow.right {
+            right: 30px;
+        }
 
-            .gallery-category h2 {
-                font-size: 22px;
-                margin-bottom: 20px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 15px;
-            }
-
-            .lightbox-close {
-                top: 20px;
-                right: 25px;
-                font-size: 35px;
-            }
+        @keyframes zoomEffect {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         /* ==========================================
-           NOWE STYLE DLA DROPDOWN (WKLEJONE TUTAJ)
-           ========================================== */
-        .dropdown {
-            position: relative;
-            display: inline-block;
+           RESPONSYWNOŚĆ
+        ========================================== */
+        @media (max-width: 1100px) {
+            header { padding: 15px 30px; }
         }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--dark);
-            border: 1px solid var(--gold);
-            border-radius: 8px;
-            list-style: none;
-            padding: 10px 0;
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-
-        .dropdown-content li a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 0;
-        }
-
-        .dropdown-content li a:hover {
-            background: rgba(212, 160, 47, 0.1);
-            color: var(--gold);
-        }
-
-        .dropdown-content svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--gold);
-        }
-
-        .dropdown:hover .dropdown-content,
-        .dropdown.open .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-trigger {
-            cursor: pointer;
-            color: var(--white);
-            font-weight: 600;
-            padding: 12px 24px;
+        @media(max-width:768px) {
+            header { flex-direction: column; padding: 15px; gap: 15px; }
+            .gallery-section { margin-top: 180px; }
+            .gallery-section h1 { font-size: 42px; }
+            .gallery-category h2 { font-size: 22px; margin-bottom: 20px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+            .lightbox-close { top: 20px; right: 25px; font-size: 35px; }
+            .lightbox-arrow { font-size: 40px; padding: 10px; }
+            .lightbox-arrow.left { left: 10px; }
+            .lightbox-arrow.right { right: 10px; }
+            
+            .dropdown { padding-bottom: 0; margin-bottom: 0; }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                background: rgba(20, 20, 20, 0.95);
+                box-shadow: none;
+                border: none;
+                margin-top: 10px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+            }
+            .dropdown.active .dropdown-content { display: flex; }
+            nav ul { flex-direction: column; width: 100%; text-align: center; gap: 5px; }
+            nav a { padding: 10px; display: block; }
+            nav li.active::after { display: none; }
         }
     </style>
 </head>
@@ -393,12 +457,8 @@
 
         <nav>
             <ul>
-                
-            <ul>
-                <li><a href="index.html" class="back-btn">← Strona Główna</a></li>
-            </ul>
-        
-                <li class="dropdown">
+                <li><a href="index.html">Strona Główna</a></li>
+                <li class="dropdown active">
                     <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
                         <li>
@@ -407,8 +467,12 @@
                                 O klubie
                             </a>
                         </li>
-                        
-                        
+                        <li>
+                            <a href="galeria.html">
+                                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                                Galeria
+                            </a>
+                        </li>
                         <li>
                             <a href="partnerzy.html">
                                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
@@ -842,29 +906,112 @@
 
             </div>
         </section>
-
-        
-
     </main>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" class="lightbox-content" src="" alt="Powiększone zdjęcie" onclick="event.stopPropagation()">
+    <div id="galleryLightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-arrow left">&#10094;</span>
+        <img class="lightbox-content" id="lightboxImg" src="" alt="Powiększone zdjęcie">
+        <span class="lightbox-arrow right">&#10095;</span>
     </div>
 
     <script>
-        // Otwiera podgląd po kliknięciu
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Wyłącza przewijanie tła
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // OBSŁUGA DROPDOWN MENU (Identyczna jak na index)
+            const dropdown = document.querySelector('.dropdown');
+            const trigger = document.querySelector('.dropdown-trigger');
 
-        // Zamyka podgląd
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Przywraca przewijanie tła
-        }
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            // ZAAWANSOWANA OBSŁUGA DYNAMICZNEJ GALERII (LIGHTBOX) Z PRZEWIJANIEM
+            const lightbox = document.getElementById('galleryLightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeBtn = document.querySelector('.lightbox-close');
+            const arrowLeft = document.querySelector('.lightbox-arrow.left');
+            const arrowRight = document.querySelector('.lightbox-arrow.right');
+            
+            // Pobranie wszystkich elementów graficznych w siatkach galerii
+            const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+            let currentImgIndex = 0;
+
+            // Funkcja aktualizująca wyświetlane zdjęcie w Lightboxie
+            function updateLightboxImage(index) {
+                currentImgIndex = index;
+                const imgElement = galleryItems[currentImgIndex].querySelector('img');
+                // Jeśli obrazek ma src, załaduj go, w przeciwnym wypadku wyczyść
+                if(imgElement.src) {
+                    lightboxImg.src = imgElement.src;
+                } else {
+                    lightboxImg.src = "";
+                }
+            }
+
+            // Otwieranie okna po kliknięciu na dowolny kafelek ze zdjęciem
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    lightbox.style.display = 'flex';
+                    updateLightboxImage(index);
+                });
+            });
+
+            // Funkcje nawigacji: Poprzednie / Następne zdjęcie
+            function showPrevImage() {
+                let newIndex = currentImgIndex - 1;
+                if (newIndex < 0) newIndex = galleryItems.length - 1; // Pętla na koniec
+                updateLightboxImage(newIndex);
+            }
+
+            function showNextImage() {
+                let newIndex = currentImgIndex + 1;
+                if (newIndex >= galleryItems.length) newIndex = 0; // Pętla na początek
+                updateLightboxImage(newIndex);
+            }
+
+            // Zdarzenia kliknięcia w strzałki ekranowe
+            arrowLeft.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showPrevImage();
+            });
+
+            arrowRight.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showNextImage();
+            });
+
+            // Zamknięcie lightboxa przyciskiem X
+            closeBtn.addEventListener('click', () => {
+                lightbox.style.display = 'none';
+            });
+
+            // Zamknięcie lightboxa po kliknięciu w tło obok zdjęcia
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.style.display = 'none';
+                }
+            });
+
+            // Obsługa fizycznych klawiszy klawiatury (Strzałki lewo/prawo oraz Esc)
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.style.display === 'flex') {
+                    if (e.key === 'ArrowLeft') {
+                        showPrevImage();
+                    } else if (e.key === 'ArrowRight') {
+                        showNextImage();
+                    } else if (e.key === 'Escape') {
+                        lightbox.style.display = 'none';
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
