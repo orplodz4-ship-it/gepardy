@@ -110,7 +110,6 @@
             color: var(--gold);
         }
 
-        /* Aktywna linia pod linkiem głównym */
         nav li.active::after {
             content: '';
             position: absolute;
@@ -121,8 +120,8 @@
             background: var(--gold);
         }
 
-        /* DROPDOWN (MENU ROZWIJANE) */
         .dropdown {
+            position: relative;
             padding-bottom: 15px;
             margin-bottom: -15px; 
         }
@@ -181,7 +180,6 @@
             transition: 0.25s;
         }
 
-        /* Ikony w dropdownie */
         .dropdown-content a svg {
             width: 18px;
             height: 18px;
@@ -199,7 +197,6 @@
             transform: scale(1.1);
         }
 
-        /* Wyświetlanie menu */
         .dropdown:hover .dropdown-content,
         .dropdown.active .dropdown-content {
             opacity: 1;
@@ -493,7 +490,7 @@
         }
 
         /* ==========================================
-           RESPONSYWNOŚĆ (MEDIA QUERIES)
+           RESPONSYWNOŚĆ
         ========================================== */
         @media (max-width: 1100px) {
             header {
@@ -535,7 +532,7 @@
                 opacity: 1;
                 visibility: visible;
                 transform: none;
-                display: none; 
+                display: none;
             }
             .dropdown.active .dropdown-content {
                 display: flex;
@@ -569,7 +566,7 @@
 
         <nav>
             <ul>
-                <li class="active"><a href="#">Strona Główna</a></li>
+                <li class="active"><a href="index.html">Strona Główna</a></li>
                 <li class="dropdown">
                     <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
@@ -677,7 +674,6 @@
                 e.stopPropagation();
                 dropdown.classList.toggle('active');
             });
-
             document.addEventListener('click', (e) => {
                 if (!dropdown.contains(e.target)) {
                     dropdown.classList.remove('active');
@@ -685,5 +681,6 @@
             });
         });
     </script>
+
 </body>
 </html>
