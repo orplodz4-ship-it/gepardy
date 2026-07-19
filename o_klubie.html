@@ -351,4 +351,36 @@
         <div class="about-grid">
             <div class="about-text">
                 <h2>Kim jesteśmy?</h2>
-                <p>Klub Unihokeja Gepardy Białystok został założony 3 września 2025 roku jako kontynuacja szkolnej drużyny unihokeja
+                <p>Klub Unihokeja Gepardy Białystok został założony 3 września 2025 roku jako kontynuacja szkolnej drużyny unihokeja. Klub działa przy Zespole Szkolno-Przedszkolnym nr 2 przy ul. Pułaskiego 25 w Białymstoku, tworząc przestrzeń do rozwoju sportowego dzieci i młodzieży.</p>
+                <p>Naszą misją jest popularyzacja unihokeja, rozwijanie umiejętności zawodników oraz kształtowanie wartości takich jak współpraca, szacunek i sportowa pasja.</p>
+            </div>
+            <div class="about-image">
+                <img src="oklubie.jpg" alt="Klub Unihokeja Gepardy Białystok" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Klub Unihokeja Gepardy Białystok
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.querySelector('.dropdown');
+            const trigger = document.querySelector('.dropdown-trigger');
+
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
