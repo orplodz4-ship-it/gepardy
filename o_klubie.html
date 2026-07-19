@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klub Gepardy Białystok - O klubie</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&display=swap" rel="stylesheet">
+    <title>O klubie - Gepardy Białystok</title>
     <style>
         :root {
-            --black: #0f0f0f;
-            --dark: #1b1b1b;
+            --black: #0a0a0a;
+            --dark-card: #141414;
             --gold: #d4a02f;
-            --gold-light: #f0c14b;
             --white: #ffffff;
-            --gray: #d8d8d8;
+            --gray: #a0a0a0;
         }
 
         * {
@@ -25,12 +21,9 @@
         }
 
         body {
-            background: var(--black);
+            background-color: var(--black);
             color: var(--white);
-            background-image: radial-gradient(circle at 50% 10%, #1a1a1a 0%, var(--black) 70%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            padding-top: 120px;
         }
 
         header {
@@ -47,99 +40,154 @@
             z-index: 999;
         }
 
-        .logo { display: flex; align-items: center; gap: 15px; }
-        .logo img { width: 65px; height: auto; }
-        .logo-text span { font-size: 12px; text-transform: uppercase; color: var(--white); display: block; margin-bottom: -5px; }
-        .logo h2 { color: var(--gold); font-family: 'Teko', sans-serif; font-size: 36px; text-transform: uppercase; line-height: 1; }
-        
-        nav ul { display: flex; list-style: none; align-items: center; gap: 10px; }
-        nav a, .dropdown-trigger { color: var(--white); text-decoration: none; padding: 12px 24px; font-weight: 600; border-radius: 4px; transition: .3s; cursor: pointer; text-transform: uppercase; font-size: 14px; }
-        nav a:hover, .dropdown-trigger:hover, .dropdown.active .dropdown-trigger { color: var(--gold); }
-
-        .dropdown { position: relative; }
-        .dropdown-content { display: none; position: absolute; top: 100%; right: 0; background: #111111; border: 1px solid #222222; box-shadow: 0 10px 25px rgba(0,0,0,0.5); min-width: 200px; border-radius: 4px; margin-top: 10px; flex-direction: column; list-style: none; padding: 5px 0; }
-        .dropdown.active .dropdown-content { display: flex; }
-        .dropdown-content li a { display: block; padding: 12px 20px; text-transform: uppercase; font-size: 13px; color: var(--white); text-decoration: none; }
-        .dropdown-content li a:hover { background: #1c1c1c; color: var(--gold); }
-
-        .about-section { width: 90%; max-width: 1200px; margin: 160px auto 60px; padding: 20px; flex: 1; }
-        .about-section h1 { text-align: center; font-family: 'Teko', sans-serif; font-size: 72px; color: var(--gold); text-transform: uppercase; line-height: 1; }
-        .about-section > p { text-align: center; color: var(--gray); font-size: 18px; margin-bottom: 60px; }
-
-        .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
-        .about-text h2 { font-family: 'Teko', sans-serif; font-size: 38px; color: var(--gold); margin-bottom: 15px; text-transform: uppercase; }
-        .about-text p { color: var(--gray); font-size: 16px; line-height: 1.8; margin-bottom: 20px; }
-
-        .about-image { position: relative; border: 1px solid rgba(212, 160, 47, .25); border-radius: 6px; overflow: hidden; height: 400px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); transition: 0.4s; }
-        .about-image::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
-        .about-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .about-image:hover img { transform: scale(1.03); }
-
-        footer { text-align: center; padding: 30px; background: #0a0a0a; border-top: 1px solid #1a1a1a; color: #555; font-size: 13px; }
-
-        @media(max-width: 992px) {
-            header { padding: 15px 30px; }
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .about-image { height: 350px; order: -1; }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        @media(max-width: 768px) {
-            header { flex-direction: column; gap: 15px; position: static; }
-            .about-section { margin-top: 40px; }
-            .about-section h1 { font-size: 52px; }
+
+        .logo img {
+            height: 70px;
+        }
+
+        .logo-text h2 {
+            color: var(--gold);
+            font-size: 28px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        nav a.back-btn {
+            border: 1px solid rgba(212, 160, 47, .4);
+            border-radius: 30px;
+            color: var(--gold);
+        }
+
+        nav a.back-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            cursor: pointer;
+            padding: 12px 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #141414;
+            border: 1px solid var(--gold);
+            list-style: none;
+            min-width: 200px;
+            padding: 10px 0;
+        }
+
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .dropdown-content svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: var(--gold);
+            font-size: 42px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--gray);
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
+
     <header>
         <div class="logo">
             <img src="logo.png" alt="Gepardy Logo">
-            <div class="logo-text"><span>Klub Unihokeja</span><h2>Gepardy</h2></div>
+            <div class="logo-text">
+                <h2>Gepardy</h2>
+            </div>
         </div>
         <nav>
             <ul>
-                <li><a href="index.html">Strona Główna</a></li>
+                <li><a href="index.html" class="back-btn">← Strona Główna</a></li>
                 <li class="dropdown">
-                    <span class="dropdown-trigger" style="color: var(--gold);">Więcej informacji ▼</span>
+                    <span class="dropdown-trigger">Więcej informacji ▼</span>
                     <ul class="dropdown-content">
-                        <li><a href="o_klubie.html">O klubie</a></li>
-                        <li><a href="galeria.html">Galeria</a></li>
-                        <li><a href="partnerzy.html">Partnerzy</a></li>
-                        <li><a href="kontakt.html">Kontakt</a></li>
+                        <li>
+                            <a href="galeria.html">
+                                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                                Galeria
+                            </a>
+                        </li>
+                        <li>
+                            <a href="partnerzy.html">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+                                Partnerzy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="kontakt.html">
+                                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                                Kontakt
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <main class="about-section">
-        <h1>O Klubie</h1>
-        <p>Poznaj historię i cele, które napędzają nasz zespół.</p>
-        <div class="about-grid">
-            <div class="about-text">
-                <h2>Kim jesteśmy?</h2>
-                <p>Klub Unihokeja Gepardy Białystok został założony 3 września 2025 roku jako kontynuacja szkolnej drużyny unihokeja. Klub działa przy Zespole Szkolno-Przedszkolnym nr 2 przy ul. Pułaskiego 25 w Białymstoku, tworząc przestrzeń do rozwoju sportowego dzieci i młodzieży.</p>
-                <p>Naszą misją jest popularyzacja unihokeja, rozwijanie umiejętności zawodników oraz kształtowanie wartości takich jak współpraca, szacunek i sportowa pasja.</p>
-            </div>
-            <div class="about-image">
-                <img src="oklubie.jpg" alt="Klub Unihokeja Gepardy Białystok" onerror="this.removeAttribute('src'); this.style.background='#1b1b1b'">
-            </div>
-        </div>
+    <main>
+        <h1>O klubie</h1>
+        <p>Klub Unihokeja Gepardy Białystok powstał z pasji do dynamicznego i widowiskowego sportu, jakim jest unihokej. Naszym celem jest popularyzacja tej dyscypliny na Podlasiu oraz szkolenie młodzieży i dorosłych.</p>
+        <p>Jako oficjalna Fundacja Gepardy Białystok skupiamy wokół siebie zawodników pełnych zaangażowania i woli walki, którzy dumnie reprezentują nasze miasto w ogólnokrajowych oraz międzynarodowych turniejach i rozgrywkach.</p>
     </main>
 
-    <footer>&copy; 2026 Klub Unihokeja Gepardy Białystok</footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const dropdown = document.querySelector('.dropdown');
-            const trigger = document.querySelector('.dropdown-trigger');
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dropdown.classList.toggle('active');
-            });
-            document.addEventListener('click', (e) => {
-                if (!dropdown.contains(e.target)) dropdown.classList.remove('active');
-            });
-        });
-    </script>
 </body>
 </html>
