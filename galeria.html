@@ -206,7 +206,6 @@
             visibility: visible;
             transform: translateY(0);
         }
-
         /* ==========================================
             GŁÓWNA SEKCJA GALERII
         ========================================== */
@@ -421,21 +420,10 @@
             .lightbox-arrow.left { left: 10px; }
             .lightbox-arrow.right { right: 10px; }
             
-            .dropdown { padding-bottom: 0; margin-bottom: 0; }
-            .dropdown-content {
-                position: static;
-                width: 100%;
-                background: rgba(20, 20, 20, 0.95);
-                box-shadow: none;
-                border: none;
-                margin-top: 10px;
-                transform: none;
-                display: none;
-            }
-            .dropdown.active .dropdown-content { display: flex; }
             
+            nav a, .dropdown-trigger { padding: 8px 12px; font-size: 12px; }
             nav ul { flex-direction: column; width: 100%; text-align: center; gap: 5px; }
-            nav a { padding: 10px; display: block; }
+            
             nav li.active::after { display: none; }
         }
     </style>
