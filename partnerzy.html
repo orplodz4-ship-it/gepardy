@@ -188,13 +188,26 @@
         h1 { color: var(--gold); font-size: 42px; text-transform: uppercase; margin-bottom: 10px; }
         .partners > p { color: var(--gray); font-size: 18px; margin-bottom: 40px; }
 
-        .partners-grid { display: flex; justify-content: center; margin-top: 20px; }
-        .partner-card { background: var(--dark-card); border: 1px solid rgba(212, 160, 47, 0.3); border-radius: 8px; padding: 30px; max-width: 320px; text-align: center; }
-        .partner-logo img { height: 100px; width: auto; margin-bottom: 20px; }
+        .partners-grid { display: flex; justify-content: center; margin-top: 20px; flex-wrap: wrap; gap: 20px; }
+        .partner-card { background: var(--dark-card); border: 1px solid rgba(212, 160, 47, 0.3); border-radius: 8px; padding: 30px; width: 100%; max-width: 320px; text-align: center; }
+        .partner-logo img { height: 100px; width: auto; max-width: 100%; margin-bottom: 20px; }
         .partner-card h3 { font-size: 22px; margin-bottom: 5px; color: var(--white); }
         .partner-card span { display: block; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
         .partner-card a { display: inline-block; color: var(--black); background: var(--gold); text-decoration: none; padding: 10px 20px; font-weight: 700; border-radius: 4px; transition: 0.3s; }
         .partner-card a:hover { background: var(--white); }
+
+        /* === DODANE: Styl responsywny dla telefonów === */
+        @media (max-width: 768px) {
+            body { padding-top: 100px; }
+            header { padding: 12px 20px; flex-direction: column; gap: 10px; }
+            .logo img { height: 50px; }
+            .logo-text h2 { font-size: 22px; }
+            nav ul { gap: 5px; flex-wrap: wrap; justify-content: center; }
+            nav a, .dropdown-trigger { padding: 8px 12px; font-size: 12px; }
+            .dropdown-content { position: fixed; left: 10px; right: 10px; top: auto; bottom: 10px; width: auto; }
+            h1 { font-size: 30px; }
+            .partners > p { font-size: 15px; }
+        }
     </style>
 </head>
 <body>
