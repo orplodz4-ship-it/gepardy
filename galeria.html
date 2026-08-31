@@ -1,44 +1,4 @@
-            Rozmowa z Gemini
-yo mam stronke w html i chce żeby była ona kompatybilna z telefonami to jest jakis prosty zabieg czy trzeba sie bawić
-
-Aby strona była kompatybilna z telefonami (czyli responsywna), nie trzeba przepisywać całego kodu, ale trzeba wykonać jeden kluczowy zabieg i zadbać o kilka prostych reguł w CSS.
-
-Oto co musisz zrobić, krok po kroku:
-
-1. Dodaj znacznik Viewport (Kluczowy krok)
-Wklej tę linijkę w sekcji <head> swojego pliku HTML. Bez tego telefon myśli, że strona ma szerokość komputera i po prostu ją pomniejsza, przez co tekst jest nieczytelny:
-
-HTML
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-2. Używaj elastycznych jednostek w CSS
-Zamiast sztywnych szerokości w pikselach (np. width: 1200px;), które "rozwalają" widok na małych ekranach, stosuj:
-
-Procenty (%) lub widok (vw), np. width: 100%;.
-
-Maksymalną szerokość (max-width), dzięki czemu element dopasuje się do ekranu, ale nie będzie za szeroki na komputerze, np. max-width: 600px;.
-
-3. Zastosuj Media Queries (Opcjonalnie, ale przydatne)
-Jeśli chcesz, aby układ strony zmieniał się na telefonie (np. ukrył się jakiś element albo zmienił rozmiar czcionki), użyj prostego zapytania w CSS:
-
-CSS
-@media (max-width: 768px) {
-  /* Styl dla telefonów i tabletów */
-  body {
-    font-size: 16px;
-    padding: 10px;
-  }
-}
-Podsumowanie
-To nie jest bardzo skomplikowane, ale wymaga dodania meta tagu i upewnienia się, że elementy nie mają narzuconych na sztywno wielkich szerokości w pikselach.
-
-Czy chcesz, żebym pomógł Ci dostosować Twój konkretny kod HTML/CSS? Pokaż go, a wskażę, co trzeba zmienić!
-
-a zobaczysz czy to jest ok? jeśli nie to pozmieniaj żeby było dobrze ale nie zmieniaj wyglądu
-
-Jasne, śmiało wklej tutaj swój kod HTML i CSS!
-
-Sprawdzę go, poprawię to, co może powodować problemy na telefonach (np. sztywne szerokości czy brak responsywności), a jednocześnie zachowam obecny wygląd i styl strony. Czekam na kod!
-
+          
 <!DOCTYPE html>
 
 <html lang="pl">
