@@ -224,16 +224,29 @@
             margin-bottom: 20px;
         }
 
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+
         .about-image img {
             width: 100%;
             height: auto;
             border-radius: 8px;
             border: 2px solid var(--gold);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        
+            display: block;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .about-image:hover{
-            background-color:gold;
+
+        .about-image:hover {
+            border-color: var(--gold-light);
+            box-shadow: 0 15px 40px rgba(212, 160, 47, 0.3);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
         }
 
         @media(max-width: 992px) {
