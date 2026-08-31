@@ -124,7 +124,7 @@
         }
 
         /* DROPDOWN (MENU ROZWIJANE) */
-        .dropdown {
+       .dropdown {
             padding-bottom: 15px;
             margin-bottom: -15px; 
         }
@@ -410,10 +410,6 @@
         /* ==========================================
             RESPONSYWNOŚĆ
         ========================================== */
-        @media (max-width: 1100px) {
-            header { padding: 15px 30px; }
-        }
-
         @media(max-width:768px) {
             header { flex-direction: column; padding: 15px; gap: 15px; }
             .gallery-section { margin-top: 180px; }
@@ -433,12 +429,11 @@
                 box-shadow: none;
                 border: none;
                 margin-top: 10px;
-                opacity: 1;
-                visibility: visible;
                 transform: none;
                 display: none;
             }
             .dropdown.active .dropdown-content { display: flex; }
+            
             nav ul { flex-direction: column; width: 100%; text-align: center; gap: 5px; }
             nav a { padding: 10px; display: block; }
             nav li.active::after { display: none; }
