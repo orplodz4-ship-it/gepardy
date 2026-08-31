@@ -196,17 +196,14 @@
         .partner-card a { display: inline-block; color: var(--black); background: var(--gold); text-decoration: none; padding: 10px 20px; font-weight: 700; border-radius: 4px; transition: 0.3s; }
         .partner-card a:hover { background: var(--white); }
 
-        /* === DODANE: Styl responsywny dla telefonów === */
+        /* Media queries dostosowane dokładnie pod Twój styl z "O klubie" */
         @media (max-width: 768px) {
-            body { padding-top: 100px; }
-            header { padding: 12px 20px; flex-direction: column; gap: 10px; }
-            .logo img { height: 50px; }
-            .logo-text h2 { font-size: 22px; }
+            header { flex-direction: column; padding: 15px; gap: 10px; }
+            body { padding-top: 180px; }
             nav ul { gap: 5px; flex-wrap: wrap; justify-content: center; }
             nav a, .dropdown-trigger { padding: 8px 12px; font-size: 12px; }
-            .dropdown-content { position: fixed; left: 10px; right: 10px; top: auto; bottom: 10px; width: auto; }
-            h1 { font-size: 30px; }
-            .partners > p { font-size: 15px; }
+            h1 { font-size: 32px; }
+            .partners > p { font-size: 16px; }
         }
     </style>
 </head>
