@@ -97,7 +97,7 @@
         }
 
         nav a:hover, nav li.active a {
-            color: var(--white);
+            color: var(--gold);
         }
 
         nav li.active::after {
@@ -208,10 +208,10 @@
             margin-bottom: 40px;
         }
 
-        /* PODZIAŁ NA 3 RÓWNE KOLUMNY */
+        /* PODZIAŁ NA KOLUMNY */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin-bottom: 50px;
         }
@@ -253,43 +253,6 @@
             color: var(--white);
         }
 
-        /* FORMULARZ USTAWIENIA */
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-
-        .form-group input, .form-group textarea {
-            background: #0d0d0d;
-            border: 1px solid #333;
-            padding: 10px;
-            color: #fff;
-            border-radius: 4px;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--gold);
-            outline: none;
-        }
-
-        .submit-btn {
-            background: var(--gold);
-            color: var(--black);
-            border: none;
-            padding: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .submit-btn:hover {
-            background: var(--white);
-        }
-
         /* MAPA GOOGLE */
         .map-container {
             width: 100%;
@@ -310,6 +273,9 @@
             .contact-grid { grid-template-columns: 1fr; gap: 20px; }
             header { flex-direction: column; padding: 15px; gap: 10px; }
             body { padding-top: 180px; }
+            nav ul { gap: 5px; flex-wrap: wrap; justify-content: center; }
+            nav a, .dropdown-trigger { padding: 8px 12px; font-size: 12px; }
+            h1 { font-size: 32px; }
         }
     </style>
 </head>
@@ -364,7 +330,7 @@
                 <h2>Dane klubu</h2>
                 <p><strong>Nazwa:</strong> Fundacja Gepardy Białystok</p>
                 <p><strong>E-mail:</strong> <a href="mailto:gepardybialystok@op.pl">gepardybialystok@op.pl</a></p>
-                <p>Chcesz dołączyć do drużyny lub zapytać o treningi? Napisz do nas bezpośrednio na e-mail lub skorzystaj z formularza obok!</p>
+                <p>Chcesz dołączyć do drużyny lub zapytać o treningi? Napisz do nas bezpośrednio na e-mail!</p>
             </div>
 
             <div class="contact-box">
@@ -376,7 +342,7 @@
         </div>
 
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2395.0504809559943!2d23.135956077356617!3d53.109285972221514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ffbff209e9e27%3A0xb57a75c6ba5568cd!2sSzko%C5%82a%20Podstawowa%20Nr%2014%20z%20Oddzia%C5%82ami%20Integracyjnymi%20im.%20Kazimierza%20Pu%C5%82askiego!5e0!3m2!1sen!2spl!4v1784464531193!5m2!1sen!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2395.0504809559943!2d23.135956077356617!3d53.109285972221514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ffbff209e9e27%3A0xb57a75c6ba5568cd!2sSzko%C5%82a%20Podstawowa%20Nr%2014%20z%20Oddzia%C5%82ami%20Integracyjnymi%20im.%20Kazimierza%20Pu%C5%82askiego!5e0!3m2!1sen!2spl!4v1784464531193!5m2!1sen!2spl" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
     </main>
 
