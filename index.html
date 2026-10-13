@@ -551,6 +551,152 @@
                 display: none;
             }
         }
+        /* ==========================================
+            AKTUALNOŚCI (NEWS SECTION STYLES)
+        ========================================== */
+        .news-section {
+            background: var(--black);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .news-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .news-subtitle {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .news-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 0 20px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: linear-gradient(180deg, #181818 0%, #0e0e0e 100%);
+            border: 1px solid rgba(212, 160, 47, 0.25);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 160, 47, 0.15);
+        }
+
+        .news-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .news-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+
+        .news-card:hover .news-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .news-date {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+        }
+
+        .news-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .news-content h3 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            transition: 0.3s;
+        }
+
+        .news-card:hover .news-content h3 {
+            color: var(--gold);
+        }
+
+        .news-content p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .news-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            align-self: flex-start;
+        }
+
+        .news-btn:hover {
+            color: var(--gold-light);
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -621,7 +767,52 @@
             </a>
         </div>
     </section>
+<!-- ==========================================
+        AKTUALNOŚCI (NEWS SECTION)
+    ========================================== -->
+    <section class="news-section">
+        <div class="news-container">
+            <div class="news-header">
+                <span class="news-subtitle">Bądź na bieżąco</span>
+                <h2 class="news-title">Aktualności</h2>
+                <div class="separator">
+                    <div class="separator-line"></div>
+                    <svg viewBox="0 0 24 24"><path d="M12 14c-1.66 0-3 1.34-3 3 0 2 2 4 3 4s3-2 3-4c0-1.66-1.34-3-3-3zm-4.5-2c-1.1 0-2-.9-2-2s1.5-3 2-3 2 1.9 2 3-.9 2-2 2zm9 0c-1.1 0-2-.9-2-2s.9-3 2-3 2 1.9 2 3-.9 2-2 2z"/></svg>
+                    <div class="separator-line right"></div>
+                </div>
+            </div>
 
+            <div class="news-grid">
+                <!-- KAFELEK AKTUALNOŚCI - SKOPIUJ TEN ELEMENT, ABY DODAĆ KOLEJNY NEWS -->
+                <article class="news-card">
+                    <div class="news-img-wrapper">
+                        <!-- Tutaj wstawiasz zdjęcie jako baner -->
+                        <img src="images/aktualnosci1.jpg" alt="Zdjęcie aktualności">
+                        <span class="news-date">14 Października 2026</span>
+                    </div>
+                    <div class="news-content">
+                        <h3>Tytuł Twojej aktualności wpisujesz tutaj</h3>
+                        <p>Krótki opis lub zajawka tego, co wydarzyło się w klubie. Możesz tu napisać o ostatnim meczu, sparingu lub ważnym wydarzeniu.</p>
+                        <a href="#" class="news-btn">Czytaj więcej ❯</a>
+                    </div>
+                </article>
+                <!-- KONIEC KAFELKA -->
+
+                <!-- DRUGI PRZYKŁAD (OPCJONALNIE) -->
+                <article class="news-card">
+                    <div class="news-img-wrapper">
+                        <img src="images/aktualnosci2.jpg" alt="Zdjęcie aktualności">
+                        <span class="news-date">10 Października 2026</span>
+                    </div>
+                    <div class="news-content">
+                        <h3>Kolejny ważny komunikat zarządu</h3>
+                        <p>Opis kolejnego wydarzenia albo informacji dla zawodników i kibiców unihokeja.</p>
+                        <a href="#" class="news-btn">Czytaj więcej ❯</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
     <section class="cards-section">
         <div class="cards-container">
             
