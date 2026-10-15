@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <style>
         /* ==========================================
-            ZMIENNE I BAZOWE USTAWIENIA
+           ZMIENNE I BAZOWE USTAWIENIA
         ========================================== */
         :root {
             --black: #0a0a0a;
@@ -37,7 +37,7 @@
         }
 
         /* ==========================================
-            NAVBAR (NAGŁÓWEK)
+           NAVBAR (NAGŁÓWEK)
         ========================================== */
         header {
             position: fixed;
@@ -205,7 +205,7 @@
             transform: translateY(0);
         }
         /* ==========================================
-            HERO SECTION
+           HERO SECTION
         ========================================== */
         .hero {
             position: relative;
@@ -310,7 +310,249 @@
         }
 
         /* ==========================================
-             AKTUALNOŚCI (NEWS SECTION)
+           KAFELKI (CARDS GRID)
+        ========================================== */
+        .cards-section {
+            background: var(--black);
+            padding: 100px 0;
+        }
+
+        .cards-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card-custom {
+            position: relative;
+            background: linear-gradient(180deg, #181818 0%, #0e0e0e 100%);
+            border: 1px solid rgba(212, 160, 47, 0.25);
+            border-radius: 12px;
+            padding: 60px 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .card-custom::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            width: 90%;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+            border-radius: 10px;
+            opacity: 0.7;
+            transition: 0.4s;
+        }
+
+        .card-icon-wrapper {
+            width: 95px;
+            height: 95px;
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0 0 15px rgba(212, 160, 47, 0.2);
+            transition: 0.4s;
+        }
+
+        .card-icon-wrapper svg {
+            width: 45px;
+            height: 45px;
+            fill: var(--gold);
+            transition: 0.4s;
+        }
+
+        .card-custom h2 {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            transition: 0.3s;
+        }
+
+        .card-link:hover .card-custom {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 
+                0 0 30px rgba(212, 160, 47, 0.15),
+                0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        .card-link:hover .card-custom::before {
+            height: 10px;
+            filter: drop-shadow(0 0 8px var(--gold));
+            opacity: 1;
+        }
+
+        .card-link:hover .card-icon-wrapper {
+            background: var(--gold);
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        .card-link:hover .card-icon-wrapper svg {
+            fill: var(--black);
+        }
+
+        .card-link:hover .card-custom h2 {
+            color: var(--gold);
+            letter-spacing: 3px;
+        }
+
+        /* ==========================================
+           STOPKA (FOOTER)
+        ========================================== */
+        footer {
+            background: #080808;
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-divider {
+            position: relative;
+            width: 80%;
+            max-width: 1200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 160, 47, 0.4) 50%, transparent);
+            margin: 0 auto 40px;
+        }
+
+        .footer-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 55px;
+            background: #080808;
+            border: 2px solid var(--gold);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-badge svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--gold);
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .partners-footer {
+            margin-top: 25px;
+        }
+
+        .partners-footer h4 {
+            color: var(--gold);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .partners-footer img {
+            height: 60px;
+            width: auto;
+            filter: grayscale(100%) brightness(150%);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .partners-footer img:hover {
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        /* ==========================================
+           RESPONSYWNOŚĆ
+        ========================================== */
+        @media (max-width: 1100px) {
+            header {
+                padding: 15px 30px;
+            }
+            .hero-title {
+                font-size: 56px;
+            }
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .hero-title {
+                font-size: 42px;
+            }
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            .dropdown {
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                background: rgba(20, 20, 20, 0.95);
+                box-shadow: none;
+                border: none;
+                margin-top: 10px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                gap: 5px;
+            }
+            nav a {
+                padding: 10px;
+                display: block;
+            }
+            nav li.active::after {
+                display: none;
+            }
+        }
+        /* ==========================================
+            AKTUALNOŚCI (NEWS SECTION STYLES)
         ========================================== */
         .news-section {
             background: var(--black);
@@ -517,15 +759,18 @@
                 <div class="separator-line right"></div>
             </div>
 
-            <!-- Zmieniony link na #aktualnosci -->
-            <a href="#aktualnosci" class="btn-outline">
-                Więcej informacji ❯
+            <a href="https://www.facebook.com/p/Gepardy-Bia%C5%82ystok-61579192367044/" 
+               class="btn-outline" 
+               target="_blank" 
+               rel="noopener noreferrer">
+               Więcej informacji ❯
             </a>
         </div>
     </section>
-
-    <!-- Dopisany ID "aktualnosci" do sekcji -->
-    <section class="news-section" id="aktualnosci">
+<!-- ==========================================
+        AKTUALNOŚCI (NEWS SECTION)
+    ========================================== -->
+    <section class="news-section">
         <div class="news-container">
             <div class="news-header">
                 <span class="news-subtitle">Bądź na bieżąco</span>
@@ -538,19 +783,24 @@
             </div>
 
             <div class="news-grid">
+                <!-- KAFELEK AKTUALNOŚCI - SKOPIUJ TEN ELEMENT, ABY DODAĆ KOLEJNY NEWS -->
                 <article class="news-card">
                     <div class="news-img-wrapper">
+                        <!-- Tutaj wstawiasz zdjęcie jako baner -->
                         <img src="848045066_122176797752973078_1832063023447303073_n.jpg" alt="Zdjęcie aktualności">
                         <span class="news-date">11 Października 2026</span>
                     </div>
                     <div class="news-content">
-                        <h3>Polska Liga Unihokeja Juniorek Młodszych sezon 2026/2027<br>W niedzielę 11 października w hali MOSIR w Orzyszu zadebiutowaliśmy na tym poziomie rozgrywek</h3>
+                        <h3>Polska Liga Unihokeja Juniorek Młodszych sezon 2026/2027
+W niedzielę 11 października w hali MOSIR w Orzyszu zadebiutowaliśmy na tym poziomie rozgrywek</h3>
                         <p>Jedynką Orzysz 1:4</p>
                         <p> Dragons Płoskinia/Wilki Godkowo 5:4 </p>
                         <a href="Debiut w Polskiej lidze Unihokeja Juniorek Młodszych 26-27.html" class="news-btn">Czytaj więcej ❯</a>
                     </div>
                 </article>
+                <!-- KONIEC KAFELKA -->
 
+                <!-- DRUGI PRZYKŁAD (OPCJONALNIE) -->
                 <article class="news-card">
                     <div class="news-img-wrapper">
                         <img src="831642421_122175388484973078_5765878026456965334_n.jpg" alt="Zdjęcie aktualności">
@@ -558,9 +808,9 @@
                     </div>
                     <div class="news-content">
                         <h3>Nowy sezon 2026/2027 rozpoczęliśmy startem naszych młodziczek w Mazowieckiej Lidze Unihokeja</h3>
-                        <p> Gepardy - Orlęta Warszawa II 6:0<br>
-                            Gepardy - Orlęta Warszawa I  1:8<br>
-                            Gepardy - Bankówka Zielonka 7:3<br>
+                        <p> Gepardy - Orlęta Warszawa II 6:0
+                            Gepardy - Orlęta Warszawa I  1:8
+                            Gepardy - Bankówka Zielonka 7:3
                             Gepardy - Uks Gródek  10:3</p>
                         <a href="Mazowiecka Liga Unihokeja Młodziczek 26-27.html" class="news-btn">Czytaj więcej ❯</a>
                     </div>
@@ -568,6 +818,7 @@
 
                 <article class="news-card">
                     <div class="news-img-wrapper">
+                        <!-- Tutaj wstawiasz zdjęcie jako baner -->
                         <img src="brno/1.jpg" alt="Zdjęcie aktualności">
                         <span class="news-date">25–28 czerwca 2026</span>
                     </div>
@@ -580,10 +831,10 @@
             </div>
         </div>
     </section>
-
     <section class="cards-section">
         <div class="cards-container">
-            <a href="https://www.facebook.com/profile.php?id=61579192367044" target="_blank" rel="noopener noreferrer" class="card-link">
+            
+            <a href="https://rejestr.io/krs/1192189/fundacja-gepardy-bialystok" target="_blank" rel="noopener noreferrer" class="card-link">
                 <div class="card-custom">
                     <div class="card-icon-wrapper">
                         <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 15.5l-4.5-4.5 1.41-1.41L11 13.67l5.59-5.59L18 9.5l-7 7z"/></svg>
@@ -600,6 +851,7 @@
                     <h2>Rozgrywki</h2>
                 </div>
             </a>
+
         </div>
     </section>
 
@@ -638,5 +890,6 @@
             });
         });
     </script>
+
 </body>
 </html>
